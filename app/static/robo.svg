@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 230" role="img" aria-label="Assistente robô ARborIA">
+  <defs>
+    <linearGradient id="r-corpo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c9d9e6"/>
+    </linearGradient>
+    <linearGradient id="r-rosto" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b2a4a"/><stop offset="1" stop-color="#061729"/>
+    </linearGradient>
+    <linearGradient id="r-fone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f7df6"/><stop offset="1" stop-color="#0a3d91"/>
+    </linearGradient>
+    <linearGradient id="r-folha" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b6f36a"/><stop offset="1" stop-color="#2e9e4f"/>
+    </linearGradient>
+    <filter id="r-brilho" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- antena com folha -->
+  <line x1="100" y1="34" x2="100" y2="18" stroke="#9fb6c8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M100 18c-2-12 8-18 18-16-1 11-8 18-18 16z" fill="url(#r-folha)"/>
+  <path d="M100 18c4-5 8-9 14-12" stroke="#1b6b34" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+
+  <!-- fones de ouvido -->
+  <rect x="22" y="70" width="22" height="46" rx="11" fill="url(#r-fone)"/>
+  <rect x="156" y="70" width="22" height="46" rx="11" fill="url(#r-fone)"/>
+  <path d="M33 72c0-30 22-40 67-40s67 10 67 40" fill="none" stroke="#2f7df6" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="33" cy="93" r="5" fill="#22d3ee" filter="url(#r-brilho)"/>
+  <circle cx="167" cy="93" r="5" fill="#22d3ee" filter="url(#r-brilho)"/>
+
+  <!-- cabeça -->
+  <rect x="38" y="42" width="124" height="104" rx="38" fill="url(#r-corpo)"/>
+  <rect x="50" y="56" width="100" height="74" rx="28" fill="url(#r-rosto)"/>
+
+  <!-- olhos -->
+  <g filter="url(#r-brilho)">
+    <ellipse cx="78" cy="92" rx="13" ry="15" fill="#22d3ee"/>
+    <ellipse cx="122" cy="92" rx="13" ry="15" fill="#22d3ee"/>
+  </g>
+  <ellipse cx="82" cy="86" rx="4" ry="5" fill="#ffffff" opacity=".85"/>
+  <ellipse cx="126" cy="86" rx="4" ry="5" fill="#ffffff" opacity=".85"/>
+  <path d="M90 114c6 6 14 6 20 0" stroke="#22d3ee" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- corpo -->
+  <rect x="62" y="150" width="76" height="56" rx="24" fill="url(#r-corpo)"/>
+  <circle cx="100" cy="176" r="11" fill="#061729"/>
+  <path d="M100 168c-5 0-8 4-8 8 6 0 10-3 8-8z" fill="url(#r-folha)"/>
+  <circle cx="100" cy="176" r="11" fill="none" stroke="#22d3ee" stroke-width="2" opacity=".8"/>
+
+  <!-- braços -->
+  <rect x="38" y="156" width="24" height="40" rx="12" fill="url(#r-corpo)"/>
+  <rect x="138" y="150" width="24" height="42" rx="12" fill="url(#r-corpo)" transform="rotate(-24 150 160)"/>
+  <circle cx="171" cy="146" r="11" fill="#e6eef5"/>
+  <path d="M168 138l2-14" stroke="#e6eef5" stroke-width="8" stroke-linecap="round"/>
+</svg>

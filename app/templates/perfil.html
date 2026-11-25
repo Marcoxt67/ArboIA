@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Meu Perfil — ARborIA{% endblock %}
+{% block nav_ativo %}perfil{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}<span>Meu Perfil</span>{% endblock %}
+{% block topo_direita %}<a class="botao-icone" href="/configuracoes" aria-label="Configurações">{{ icone('config') }}</a>{% endblock %}
+
+{% block conteudo %}
+<section class="perfil-topo fade-up">
+  <div class="avatar">
+    <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4.2"/><path d="M3.5 21c.4-4.4 3.8-7 8.5-7s8.1 2.6 8.5 7z"/></svg>
+    <button type="button" class="editar" data-bs-toggle="modal" data-bs-target="#modal-nome" aria-label="Editar nome">{{ icone('lapis') }}</button>
+  </div>
+  <h2 class="perfil-nome">{{ nome_jogador }}</h2>
+  <div class="perfil-nivel">{{ icone('estrela') }} Nível {{ nivel_info.nivel }}</div>
+</section>
+
+<section class="cartao mt-3 fade-up">
+  <h2 class="titulo-secao">Minha Jornada</h2>
+  <ul class="jornada">
+    {% for item in jornada %}
+    <li><span class="ok">{{ icone('check') }}</span><span><span class="quando">{{ item.quando }}</span>{{ item.texto }}</span></li>
+    {% else %}
+    <li class="vazio">Sua jornada começa na primeira partida. <a class="link-sutil" href="/jogo">Jogar agora →</a></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="cartao mt-3 fade-up">
+  <div class="trio">
+    <div>{{ icone('trofeu') }}<b>{{ progresso.pontuacao_total }}</b><small>Pontos</small></div>
+    <div><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--ouro)"><circle cx="12" cy="9" r="6"/><path d="M8.2 14.2L7 22l5-3 5 3-1.2-7.8"/></svg><b>{{ total_conquistas }}</b><small>Conquistas</small></div>
+    <div>{{ icone('grafico') }}<b>{{ progresso.partidas }}</b><small>Partidas</small></div>
+  </div>
+</section>
+
+<section class="cartao mt-3 fade-up">
+  <h2 class="titulo-secao">Meu Progresso</h2>
+  <div class="anel-linha">
+    <div class="anel" style="--p:{{ nivel_info.percentual }}" role="img" aria-label="{{ nivel_info.percentual }}% do caminho para o nível {{ nivel_info.proximo }}"><b>{{ nivel_info.percentual }}%</b></div>
+    <div class="texto">
+      <strong>Rumo ao Nível {{ nivel_info.proximo }}!</strong>
+      Faltam {{ 100 - nivel_info.percentual }} pontos. Conclua fases da trilha para subir de nível.
+    </div>
+  </div>
+</section>
+
+<div class="d-grid gap-2 mt-3 fade-up">
+  <a href="/conquistas" class="botao-contorno">{{ icone('trofeu') }} Ver conquistas</a>
+  <a href="/progresso" class="botao-contorno">{{ icone('grafico') }} Histórico de partidas</a>
+</div>
+
+<!-- Editar nome -->
+<div class="modal fade" id="modal-nome" tabindex="-1" aria-labelledby="modal-nome-titulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content" method="post" action="/perfil/nome">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modal-nome-titulo">Como devemos te chamar?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label" for="campo-nome">Seu nome</label>
+        <input class="form-control form-control-lg" id="campo-nome" name="nome" maxlength="30" value="{{ nome_jogador if nome_jogador != 'Jogador(a)' else '' }}" placeholder="Ex.: Marcos Silva" autocomplete="name">
+        <div class="form-text">O nome fica salvo apenas neste navegador.</div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="botao-principal botao-bloco">{{ icone('check') }} Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

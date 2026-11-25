@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Análise da IA — ARborIA{% endblock %}
+{% block nav_ativo %}ia{% endblock %}
+{% block topo_titulo %}{{ icone('cpu') }}<span>{{ 'Análise da IA' if relatorio else 'Inteligência Artificial' }}</span>{% endblock %}
+
+{% block conteudo %}
+{% if relatorio %}
+  {% include "_analise.html" %}
+{% else %}
+  {% if erro %}<div class="alert alert-warning">{{ erro }}</div>{% endif %}
+
+  <div class="ia-topo fade-up">
+    <img class="robo" src="/static/robo.svg" alt="Robô assistente da ARborIA">
+    <div class="balao">Olá! Eu analiso sua combinação de fichas. Como você quer começar?</div>
+  </div>
+
+  <div class="modos-ia fade-up">
+    <a class="modo-ia" href="/jogo">{{ icone('jogar') }}Seguir a trilha<small>Use o tabuleiro físico e fotografe</small></a>
+    <a class="modo-ia" href="/foto">{{ icone('camera') }}Fotografar<small>Fichas sobre a mesa</small></a>
+  </div>
+
+  <section class="cartao mb-3 fade-up">
+    <h2 class="titulo-secao">{{ icone('brilho') }} O que a IA devolve</h2>
+    <div class="analise-item"><span class="ok">{{ icone('check') }}</span><div><h3>Relação entre os elementos</h3><p class="sub">Como limite, problemática e solução se conectam.</p></div></div>
+    <div class="analise-item"><span class="ok">{{ icone('check') }}</span><div><h3>Impactos positivos</h3><p class="sub">O que a solução proposta melhora.</p></div></div>
+    <div class="analise-item"><span class="ok">{{ icone('check') }}</span><div><h3>Sugestões de melhoria</h3><p class="sub">Efeitos colaterais e caminhos para ampliar.</p></div></div>
+  </section>
+
+  <section class="cartao cartao-ciano fade-up">
+    <h2 class="titulo-secao">{{ icone('info') }} Como a leitura funciona</h2>
+    <p class="small mb-2"><strong>Modo local:</strong> OpenCV + Tesseract leem o texto das fichas e um analisador de regras identifica sinergias e efeitos colaterais.</p>
+    <p class="small mb-0"><strong>Modo multimodal:</strong> com chave de API configurada, um modelo de visão interpreta a imagem diretamente. A IA apoia o pensamento crítico — não entrega a resposta pronta.</p>
+  </section>
+{% endif %}
+{% endblock %}

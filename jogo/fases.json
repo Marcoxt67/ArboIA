@@ -1,0 +1,107 @@
+{
+  "titulo": "Trilha ARboIA",
+  "descricao": "Dez desafios progressivos. Em cada fase, monte as fichas, fotografe e atinja a pontuação mínima para avançar.",
+  "nota": "A pontuação recompensa completude, conexão entre limites, sinergias e identificação de efeitos colaterais — não 'respostas certas'.",
+  "fases": [
+    {
+      "numero": 1,
+      "nome": "Primeiro Contato",
+      "meta": 60,
+      "icone": "🌱",
+      "cor": "#198754",
+      "limite_foco": "clima",
+      "desafio": "Monte sua primeira combinação completa: um limite planetário, uma problemática e uma intervenção.",
+      "dica": "Comece pelo limite Mudança climática. Use P1.1 (transporte urbano) e I1.1 (ônibus elétricos)."
+    },
+    {
+      "numero": 2,
+      "nome": "Cidade em Movimento",
+      "meta": 60,
+      "icone": "🚌",
+      "cor": "#2e7d4f",
+      "limite_foco": "clima",
+      "desafio": "Conecte o transporte urbano a outro limite planetário além do clima.",
+      "dica": "Eletrificar a frota afeta o ciclo do fósforo e os aerossóis. Coloque a ficha afetada ao lado da intervenção."
+    },
+    {
+      "numero": 3,
+      "nome": "Gotas que Contam",
+      "meta": 60,
+      "icone": "💧",
+      "cor": "#0d6efd",
+      "limite_foco": "agua",
+      "desafio": "Ligue o consumo de água doce a uma intervenção que também ajude outro limite.",
+      "dica": "Irrigação por gotejamento reduz o escoamento de fertilizantes (fósforo e nitrogênio)."
+    },
+    {
+      "numero": 4,
+      "nome": "Nutrientes em Excesso",
+      "meta": 70,
+      "icone": "🌾",
+      "cor": "#6f42c1",
+      "limite_foco": "nitrogenio",
+      "desafio": "Mostre que o excesso de nitrogênio e fósforo tem causas compartilhadas.",
+      "dica": "Combine P4.1 algas tóxicas com I4.3 wetlands construídas e I5.3 saneamento."
+    },
+    {
+      "numero": 5,
+      "nome": "Fósforo Finito",
+      "meta": 70,
+      "icone": "💎",
+      "cor": "#6610f2",
+      "limite_foco": "fosforo",
+      "desafio": "Proponha recuperar fósforo em vez de apenas extraí-lo.",
+      "dica": "Use I5.1 (struvita) e conecte à água doce e ao nitrogênio."
+    },
+    {
+      "numero": 6,
+      "nome": "Vida que Some",
+      "meta": 70,
+      "icone": "🦜",
+      "cor": "#fd7e14",
+      "limite_foco": "extincao",
+      "desafio": "Relacione extinção, biodiversidade funcional e uso do solo.",
+      "dica": "Corredores ecológicos e unidades de conservação com manejo participativo ajudam os três limites."
+    },
+    {
+      "numero": 7,
+      "nome": "Coração de Corais",
+      "meta": 80,
+      "icone": "🪸",
+      "cor": "#0dcaf0",
+      "limite_foco": "oceanos",
+      "desafio": "Una clima, oceanos, biodiversidade e extinção em uma única proposta.",
+      "dica": "Manguezais (I8.3) protegem corais, abrigam espécies e armazenam carbono."
+    },
+    {
+      "numero": 8,
+      "nome": "Ar que Respiramos",
+      "meta": 80,
+      "icone": "🌬️",
+      "cor": "#6c757d",
+      "limite_foco": "aerossois",
+      "desafio": "Enfrente o trade-off dos aerossóis: poluição é ruim, mas alguns partículas resfriam o planeta.",
+      "dica": "Combine I9.1 e I9.2 com clima e explique a incerteza na sua análise."
+    },
+    {
+      "numero": 9,
+      "nome": "Rede da Vida",
+      "meta": 90,
+      "icone": "🦋",
+      "cor": "#d63384",
+      "limite_foco": "biodiversidade",
+      "desafio": "Construa uma proposta com pelo menos três limites e duas sinergias reconhecidas.",
+      "dica": "Agrofloresta (I2.2) conecta biodiversidade, nitrogênio, uso do solo e clima."
+    },
+    {
+      "numero": 10,
+      "nome": "Guardiões da Terra",
+      "meta": 90,
+      "icone": "🌍",
+      "cor": "#ffc107",
+      "limite_foco": "todos",
+      "desafio": "Desafio final: una os dois limites centrais, identifique efeitos colaterais e proponha mitigação.",
+      "dica": "Clima + biodiversidade + duas sinergias + dois trade-offs = pontuação máxima."
+    }
+  ]
+}

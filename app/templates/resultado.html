@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Análise da IA — ARborIA{% endblock %}
+{% block nav_ativo %}ia{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/foto" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}<span>Análise da IA</span>{% endblock %}
+
+{% block conteudo %}
+{% if erro %}
+  <div class="cartao cartao-ouro text-center">
+    <div style="font-size:2.6rem">😕</div>
+    <h2 class="h5 fw-bold">Não deu para analisar</h2>
+    <p>{{ erro }}</p>
+    <a class="botao-principal" href="/foto">{{ icone('camera') }} Tentar outra foto</a>
+  </div>
+{% else %}
+  {% include "_analise.html" %}
+{% endif %}
+{% endblock %}

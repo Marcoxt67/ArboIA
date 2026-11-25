@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Fichas — ARborIA{% endblock %}
+{% block nav_ativo %}jogar{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/jogo" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}{{ icone('cartas') }}<span>Fichas do jogo</span>{% endblock %}
+
+{% block conteudo %}
+<p class="topo-subtitulo">9 limites · 27 problemáticas · 27 intervenções<br>Modelo de Steffen et al. (2015)</p>
+
+<div class="d-flex flex-wrap gap-2 justify-content-center mb-3 small">
+  <span class="selo-ficha limite">Limite</span><span class="selo-ficha problema">Problemática</span>
+  <span class="selo-ficha solucao">Intervenção</span><span class="chip">★ Limite central</span>
+</div>
+
+{% for limite in limites %}
+<article class="cartao ficha-impressa fade-up" style="border-top:5px solid {{ {'clima':'#0ea5e9','biodiversidade':'#7cc43f','extincao':'#fd7e14','nitrogenio':'#6f42c1','fosforo':'#6610f2','uso_solo':'#2e7d4f','agua':'#0284c7','oceanos':'#22d3ee','aerossois':'#6c757d'}.get(limite.id, '#2e7d4f') }}">
+  <div class="cabeca">
+    <div>
+      <span class="cod">{{ limite.codigo }}</span>{% if limite.central %} <span class="chip" style="padding:.05rem .5rem">★ central</span>{% endif %}
+      <h2>{{ limite.nome }}</h2>
+    </div>
+    <span class="emoji">{{ {'clima':'🌡️','biodiversidade':'🦋','extincao':'🦜','nitrogenio':'🌾','fosforo':'💎','uso_solo':'🌱','agua':'💧','oceanos':'🪸','aerossois':'🌬️'}.get(limite.id, '🌍') }}</span>
+  </div>
+  <p class="small" style="color:var(--muted)">{{ limite.descricao }}</p>
+  <div class="small mb-3">
+    <div><strong>Variável:</strong> {{ limite.variavel_controle }}</div>
+    <div><span class="selo-zona zona-segura" style="padding:0 .45rem;border-radius:999px;font-size:.66rem;font-weight:800">Segura</span> {{ limite.zona_segura }}</div>
+    <div><span class="selo-zona zona-incerteza" style="padding:0 .45rem;border-radius:999px;font-size:.66rem;font-weight:800">Incerteza</span> {{ limite.zona_incerteza }}</div>
+    <div><span class="selo-zona zona-risco" style="padding:0 .45rem;border-radius:999px;font-size:.66rem;font-weight:800">Risco</span> {{ limite.zona_risco }}</div>
+  </div>
+  {% for p in limite.problematicas %}<div class="mini-item p"><b>{{ p.codigo }}</b>{{ p.texto }}</div>{% endfor %}
+  {% for i in limite.intervencoes %}<div class="mini-item i"><b>{{ i.codigo }}</b>{{ i.texto }}</div>{% endfor %}
+</article>
+{% endfor %}
+
+<p class="small text-center mt-3" style="color:var(--muted)">Para imprimir em fichas recortáveis, abra <code>jogo/imprimir/fichas.html</code> no navegador e use Ctrl+P.</p>
+<div class="d-grid"><a href="/jogo" class="botao-principal">{{ icone('jogar') }} Usar fichas digitais</a></div>
+{% endblock %}

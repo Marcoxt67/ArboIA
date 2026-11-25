@@ -1,0 +1,27 @@
+# Ferramentas baixadas localmente (Tesseract + idiomas)
+.ferramentas/
+
+# Ambiente e segredos
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Uploads gerados em tempo de execução
+app/uploads/*
+!app/uploads/.gitkeep
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

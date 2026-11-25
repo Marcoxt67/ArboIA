@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Fase {{ fase.numero }} — ARborIA{% endblock %}
+{% block nav_ativo %}jogar{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/jogo" aria-label="Voltar à trilha">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}<span>Fase {{ '%02d'|format(fase.numero) }} de {{ progresso.total_fases }}</span>{% endblock %}
+
+{% block conteudo %}
+<div class="d-flex align-items-center gap-3 mb-3 fade-up">
+  <div class="fase-icone" style="font-size:2.8rem" aria-hidden="true">{{ fase.icone }}</div>
+  <div class="flex-grow-1">
+    <div class="small" style="color:var(--muted)">DESAFIO {{ '%02d'|format(fase.numero) }}</div>
+    <h2 class="h5 fw-bold mb-0">{{ fase.nome }}</h2>
+  </div>
+  <div class="text-end">
+    <div class="h3 fw-bold mb-0" style="color:var(--ouro)">{{ fase.meta }}</div>
+    <div class="small" style="color:var(--muted)">pontos para avançar</div>
+  </div>
+</div>
+
+<div class="desafio-caixa mb-3 fade-up">
+  <strong>🎯 Desafio do tabuleiro</strong>
+  <p class="mb-2 mt-1 small">{{ fase.desafio }}</p>
+  <span class="chip">💡 {{ fase.dica }}</span>
+</div>
+
+<section class="cartao passo-tabuleiro mb-3 fade-up">
+  <div class="passo-titulo">🧩 Sua missão acontece no tabuleiro físico</div>
+  <p class="small mb-2">Use as fichas impressas ou físicas para montar uma proposta. A plataforma entra como apoio: fotografa a montagem, interpreta as relações e devolve uma avaliação pedagógica.</p>
+  <div class="passos-fichas"><span class="passo-limite">🌎 Limite planetário</span><span class="passo-problema">⚠️ Problemática</span><span class="passo-solucao">🌱 Solução</span></div>
+</section>
+
+<form action="/analisar_fase" method="post" enctype="multipart/form-data" class="fade-up">
+  <input type="hidden" name="fase" value="{{ fase.numero }}">
+  <input type="file" class="d-none" id="foto-camera" accept="image/*" capture="environment">
+  <input type="file" class="d-none" id="imagem" name="imagem" accept="image/*">
+
+  <div class="visor vazio" id="visor">
+    <span class="canto tl"></span><span class="canto tr"></span><span class="canto bl"></span><span class="canto br"></span>
+    <img id="preview-imagem" class="d-none" alt="Prévia da foto das fichas">
+    <div class="dica" id="visor-dica">{{ icone('camera') }}<div><strong>Fotografe seu tabuleiro real</strong><br><small>Enquadre todas as fichas, deixe-as separadas, bem iluminadas e com os textos legíveis.</small></div></div>
+  </div>
+
+  <div class="controles-camera">
+    <button type="button" class="botao-icone abrir-galeria galeria" aria-label="Escolher da galeria" style="width:54px;height:54px;border-radius:16px">{{ icone('imagem') }}</button>
+    <button type="button" class="obturador abrir-camera" aria-label="Tirar foto"><span></span></button>
+    <span></span>
+  </div>
+
+  <details class="cartao cartao-suave mb-3">
+    <summary style="cursor:pointer;font-weight:600">Texto das fichas <span class="text-muted" style="font-weight:400">(opcional)</span></summary>
+    <textarea class="form-control mt-2" id="texto_manual" name="texto_manual" rows="3"
+              placeholder="Ex.: L1 Mudança climática P1.1 transporte I1.1 ônibus elétricos"></textarea>
+    <div class="form-text">Use se a foto não puder ser lida. O texto é somado ao OCR.</div>
+  </details>
+
+  <button type="submit" class="botao-principal botao-bloco desativado" id="botao-enviar-foto" disabled>{{ icone('brilho') }} Analisar tabuleiro com IA e receber nota</button>
+  <p class="small text-center mt-2" style="color:var(--muted)">A IA vai identificar as fichas, avaliar as conexões, apontar impactos e sugerir melhorias.</p>
+</form>
+
+<section class="cartao cartao-ciano mt-3 fade-up">
+  <h2 class="titulo-secao">{{ icone('brilho') }} Rubrica da fase</h2>
+  <table class="rubrica">
+    <tbody>
+      <tr><td>Fichas azul + vermelha + verde</td><td>30</td></tr>
+      <tr><td>Combinação completa</td><td>10</td></tr>
+      <tr><td>Limites conectados (até 3)</td><td>30</td></tr>
+      <tr><td>Sinergias (até 2)</td><td>20</td></tr>
+      <tr><td>Efeitos colaterais (até 2)</td><td>10</td></tr>
+      <tr><td>Limite central incluído</td><td>10</td></tr>
+    </tbody>
+  </table>
+  <p class="small mt-3 mb-0" style="color:var(--muted)">A nota mede <strong style="color:var(--texto)">completude, conexões e sinergias</strong>, não acertos decorados.</p>
+</section>
+
+<section class="cartao mt-3 fade-up">
+  <div class="d-flex justify-content-between align-items-center">
+    <div><div class="h4 fw-bold mb-0" style="color:var(--neon)">{{ progresso.concluidas|length }}/{{ progresso.total_fases }}</div>
+    <div class="small" style="color:var(--muted)">fases concluídas · {{ progresso.pontuacao_total }} pontos</div></div>
+    <a href="/jogo" class="botao-contorno botao-pequeno">Ver todas</a>
+  </div>
+</section>
+{% endblock %}

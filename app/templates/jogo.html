@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Trilha de Desafios — ARborIA{% endblock %}
+{% block nav_ativo %}jogar{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/" aria-label="Voltar ao início">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}<span>Trilha de Desafios</span>{% endblock %}
+
+{% block conteudo %}
+{% set pct = (progresso.concluidas|length / progresso.total_fases * 100)|round|int %}
+<section class="trilha-hero fade-up">
+  <div class="trilha-hero-copy">
+    <span class="eyebrow">SUA JORNADA AMBIENTAL</span>
+    <h2>Complete as <em>10 etapas</em></h2>
+    <p>Use o tabuleiro físico, fotografe sua combinação e receba a avaliação da IA para avançar.</p>
+  </div>
+  <div class="trilha-resumo">
+    <div class="trilha-resumo-num">{{ progresso.concluidas|length }}<small>/10</small></div>
+    <div class="trilha-resumo-bar"><span style="width:{{ pct }}%"></span></div>
+    <div class="trilha-resumo-bottom"><span>{{ pct }}% concluído</span><strong>⭐ {{ progresso.pontuacao_total }} pts</strong></div>
+  </div>
+</section>
+
+<section class="trilha-como fade-up" aria-label="Como jogar">
+  <div><span>1</span><strong>Veja o desafio</strong></div>
+  <div><span>2</span><strong>Monte no tabuleiro real</strong></div>
+  <div><span>3</span><strong>Fotografe e envie</strong></div>
+  <div><span>4</span><strong>Receba a análise da IA</strong></div>
+</section>
+
+<div class="trilha-lista fade-up">
+  {% for fase in fases %}
+    {% if fase.numero in progresso.concluidas %}{% set estado = 'concluida' %}
+    {% elif fase.numero == progresso.fase_atual %}{% set estado = 'atual' %}
+    {% else %}{% set estado = 'bloqueada' %}{% endif %}
+    <article class="trilha-etapa {{ estado }}">
+      <div class="trilha-conector" aria-hidden="true"></div>
+      <div class="trilha-bolha">
+        {% if estado == 'concluida' %}<span class="trilha-check">✓</span>
+        {% elif estado == 'bloqueada' %}<span class="trilha-lock">🔒</span>
+        {% else %}<span class="trilha-num">{{ '%02d'|format(fase.numero) }}</span>{% endif %}
+      </div>
+      <div class="trilha-etapa-card">
+        <div class="trilha-card-top">
+          <span class="trilha-categoria">DESAFIO {{ '%02d'|format(fase.numero) }}</span>
+          {% if estado == 'concluida' %}<span class="trilha-status status-ok">Concluído</span>
+          {% elif estado == 'atual' %}<span class="trilha-status status-atual">Sua vez</span>
+          {% else %}<span class="trilha-status status-lock">Bloqueado</span>{% endif %}
+        </div>
+        <h3>{{ fase.icone }} {{ fase.nome }}</h3>
+        <p>{{ fase.desafio }}</p>
+        <div class="trilha-card-meta"><span>🏆 Meta: {{ fase.meta }} pontos</span><span>📷 Tabuleiro físico + IA</span></div>
+        {% if estado != 'bloqueada' %}
+          <a class="trilha-etapa-btn {% if estado == 'concluida' %}btn-concluida{% endif %}" href="/fase/{{ fase.numero }}">
+            {% if estado == 'concluida' %}Revisar desafio{% else %}Começar desafio{% endif %} <span>→</span>
+          </a>
+        {% else %}
+          <div class="trilha-etapa-btn disabled">Conclua a etapa anterior para desbloquear</div>
+        {% endif %}
+      </div>
+    </article>
+  {% endfor %}
+</div>
+
+<section class="trilha-final fade-up">
+  <span class="trilha-final-icon">🌍</span>
+  <h2>{% if progresso.concluidas|length == progresso.total_fases %}Trilha concluída!{% else %}Sua missão é cuidar do planeta{% endif %}</h2>
+  <p>{% if progresso.concluidas|length == progresso.total_fases %}Parabéns por concluir todos os desafios. Continue usando o tabuleiro e explorando novas combinações.{% else %}Cada etapa é uma missão no tabuleiro físico. A IA não joga por você: ela explica, avalia e ajuda a aprimorar suas ideias.{% endif %}</p>
+  <a href="/foto" class="trilha-final-link">📷 Analisar combinação livre</a>
+</section>
+{% endblock %}

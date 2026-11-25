@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Planeta Terra com folhas e circuitos">
+  <defs>
+    <radialGradient id="mar" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#083344"/>
+    </radialGradient>
+    <linearGradient id="folha" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b6f36a"/>
+      <stop offset="100%" stop-color="#2e7d4f"/>
+    </linearGradient>
+    <filter id="brilho"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="120" cy="120" r="92" fill="url(#mar)" stroke="#a8e063" stroke-width="3"/>
+  <g fill="url(#folha)" opacity=".95">
+    <path d="M63 74c14-10 31-6 39 6-16 2-24 12-27 27-12-8-18-21-12-33z"/>
+    <path d="M124 58c15-5 29 3 32 16-15-1-26 5-32 18-9-11-10-25 0-34z"/>
+    <path d="M150 112c17-6 34 2 39 16-16 0-27 7-32 20-10-12-14-26-7-36z"/>
+    <path d="M85 140c15-7 31 0 36 14-15 1-25 9-29 21-11-11-15-24-7-35z"/>
+    <path d="M52 118c10-8 24-5 30 6-13 2-20 10-22 21-10-7-13-18-8-27z"/>
+  </g>
+  <g stroke="#a8e063" stroke-width="2" fill="none" opacity=".8">
+    <path d="M120 28v-14M120 226v-14M28 120H14M226 120h-14"/>
+    <path d="M55 55l-10-10M185 55l10-10M55 185l-10 10M185 185l10 10"/>
+    <circle cx="120" cy="14" r="3" fill="#b6f36a"/>
+    <circle cx="120" cy="226" r="3" fill="#b6f36a"/>
+    <circle cx="14" cy="120" r="3" fill="#22d3ee"/>
+    <circle cx="226" cy="120" r="3" fill="#22d3ee"/>
+  </g>
+  <g stroke="#22d3ee" stroke-width="1.5" fill="none" opacity=".55">
+    <path d="M120 120L60 60M120 120l60-40M120 120l50 60M120 120l-60 50"/>
+    <circle cx="60" cy="60" r="3" fill="#22d3ee"/>
+    <circle cx="180" cy="80" r="3" fill="#22d3ee"/>
+    <circle cx="170" cy="180" r="3" fill="#22d3ee"/>
+    <circle cx="60" cy="170" r="3" fill="#22d3ee"/>
+  </g>
+  <circle cx="120" cy="120" r="92" fill="none" stroke="#b6f36a" stroke-width="1" opacity=".35" filter="url(#brilho)"/>
+</svg>

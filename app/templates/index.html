@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}ARborIA — Aprenda. Pense. Preserve.{% endblock %}
+{% block nav_ativo %}inicio{% endblock %}
+{% block topo_titulo %}<span class="topo-marca">ARbor<span>IA</span></span>{% endblock %}
+
+{% block conteudo %}
+<section class="home-hero fade-up">
+  <div class="home-hero-texto">
+    <span class="eyebrow">APRENDIZAGEM • NATUREZA • TECNOLOGIA</span>
+    <h2>Olá! Vamos cuidar <em>do planeta?</em></h2>
+    <p>Use o tabuleiro físico para conectar limites, problemáticas e soluções. A IA analisa sua montagem, explica os impactos e avalia sua proposta.</p>
+    <a href="/jogo" class="botao-principal home-cta">{{ icone('play', 'ico-cheio') }} Jogar — abrir trilha <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="home-hero-art" aria-label="Ilustração do planeta Terra">
+    <div class="orbita orbita-1"></div><div class="orbita orbita-2"></div>
+    <img src="/static/terra.svg" alt="Planeta Terra com folhas e circuitos" class="home-terra">
+    <span class="folha-decor folha-a">✦</span><span class="folha-decor folha-b">✧</span>
+  </div>
+</section>
+
+<section class="home-stats fade-up" aria-label="Resumo da sua jornada">
+  <div class="stat-icon">🏆</div>
+  <div class="stat-main">
+    <strong>Sua jornada</strong>
+    <span>Nível {{ nivel_info.nivel }} · Explorador ambiental</span>
+    {% set pct = (progresso.concluidas|length / progresso.total_fases * 100)|round|int if progresso.total_fases else 0 %}
+    <div class="progress-track"><span style="width:{{ pct }}%"></span></div>
+    <small>{{ progresso.pontuacao_total }} pontos · {{ progresso.concluidas|length }} de {{ progresso.total_fases }} desafios concluídos</small>
+  </div>
+  <div class="stat-side"><span>🌟</span><strong>{{ progresso.concluidas|length }}</strong><small>concluídos</small></div>
+</section>
+
+<div class="section-heading fade-up">
+  <div><span class="eyebrow">EXPLORE A PLATAFORMA</span><h2>O que vamos fazer hoje?</h2></div>
+  <span class="section-leaf">✳</span>
+</div>
+
+<section class="home-grid fade-up" aria-label="Áreas da plataforma">
+  <a class="home-card home-card-jogo" href="/jogo">
+    <span class="home-card-icon">🎮</span><span class="home-card-arrow">↗</span>
+    <strong>Trilha de desafios</strong><small>Complete as 10 etapas, monte as fichas no tabuleiro real e receba a avaliação da IA.</small>
+  </a>
+  <a class="home-card home-card-limites" href="/limites">
+    <span class="home-card-icon">🌎</span><span class="home-card-arrow">↗</span>
+    <strong>Os 9 limites</strong><small>Entenda os sistemas que mantêm a Terra em equilíbrio.</small>
+  </a>
+  <a class="home-card home-card-ia" href="/ia">
+    <span class="home-card-icon">✳</span><span class="home-card-arrow">↗</span>
+    <strong>Analisar com IA</strong><small>Receba uma avaliação das suas propostas.</small>
+  </a>
+  <a class="home-card home-card-progresso" href="/progresso">
+    <span class="home-card-icon">📈</span><span class="home-card-arrow">↗</span>
+    <strong>Meu progresso</strong><small>Acompanhe seus pontos, fases e conquistas.</small>
+  </a>
+</section>
+
+<a href="/jogo" class="home-photo-link fade-up">
+  <span class="photo-symbol">🧩</span><span><strong>10 desafios no tabuleiro físico</strong><small>Escolha um desafio, monte sua combinação com as fichas reais e fotografe para receber a avaliação da IA.</small></span><span class="photo-arrow">→</span>
+</a>
+
+<div class="home-footer-note">{{ total_fichas }} fichas educativas <span>•</span> {{ total_limites }} limites planetários <span>•</span> ARborIA</div>
+{% endblock %}

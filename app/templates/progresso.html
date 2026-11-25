@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Meu Progresso — ARborIA{% endblock %}
+{% block nav_ativo %}perfil{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/perfil" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}{{ icone('grafico') }}<span>Meu Progresso</span>{% endblock %}
+
+{% block conteudo %}
+{% set pct = (progresso.concluidas|length / progresso.total_fases * 100)|round|int %}
+<section class="cartao text-center mb-3 fade-up">
+  <div class="small" style="color:var(--muted)">Pontos acumulados</div>
+  <div class="display-4 fw-bold" style="color:var(--ouro)">{{ progresso.pontuacao_total }}</div>
+  <div class="perfil-nivel justify-content-center">{{ icone('estrela') }} Nível {{ nivel_info.nivel }}</div>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <div class="trio">
+    <div>{{ icone('alvo') }}<b>{{ progresso.concluidas|length }}/{{ progresso.total_fases }}</b><small>Fases</small></div>
+    <div>{{ icone('camera') }}<b>{{ progresso.usos_foto }}</b><small>Por foto</small></div>
+    <div>{{ icone('cpu') }}<b>{{ progresso.usos_digital }}</b><small>Digitais</small></div>
+  </div>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <div class="d-flex justify-content-between align-items-center mb-1">
+    <h2 class="titulo-secao mb-0">{{ icone('alvo') }} Desafios ambientais</h2>
+    <a href="/jogo" class="link-sutil">Ver trilha →</a>
+  </div>
+  <div class="barra-progresso mb-2"><div style="width:{{ pct }}%"></div></div>
+  {% for fase in fases %}
+  <div class="d-flex align-items-center gap-3 py-2" style="border-top:1px solid var(--borda-suave)">
+    <span style="font-size:1.4rem">{{ fase.icone }}</span>
+    <div class="flex-grow-1">
+      <div class="fw-semibold small">{{ '%02d'|format(fase.numero) }} · {{ fase.nome }}</div>
+      <div class="small" style="color:var(--muted);font-size:.74rem">Meta: {{ fase.meta }} pontos</div>
+    </div>
+    {% if fase.numero in progresso.concluidas %}<span class="etiqueta-fase ok">{{ icone('check') }} Concluída</span>
+    {% elif fase.numero == progresso.fase_atual %}<span class="etiqueta-fase vez">🎯 Atual</span>
+    {% else %}<span class="etiqueta-fase trava">{{ icone('cadeado') }}</span>{% endif %}
+  </div>
+  {% endfor %}
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <h2 class="titulo-secao">{{ icone('trofeu') }} Conquistas</h2>
+  <p class="small mb-3" style="color:var(--muted)">{{ progresso.conquistas|selectattr('desbloqueada')|list|length }} de {{ progresso.conquistas|length }} desbloqueadas.</p>
+  <a href="/conquistas" class="botao-contorno botao-bloco">Ver conquistas</a>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <h2 class="titulo-secao">{{ icone('livro') }} Histórico de partidas</h2>
+  {% if progresso.historico %}
+  <div class="table-responsive">
+    <table class="tabela-simples">
+      <thead><tr><th>Origem</th><th>Desafio</th><th>Pts</th><th>Resultado</th></tr></thead>
+      <tbody>
+        {% for item in progresso.historico|reverse %}
+        <tr>
+          <td>{% if item.origem == 'digital' %}Digital{% else %}Foto{% endif %}</td>
+          <td>{% if item.fase == 0 %}Livre{% else %}Fase {{ '%02d'|format(item.fase) }}{% endif %}</td>
+          <td><strong>{{ item.pontos }}</strong></td>
+          <td>{% if item.atingiu %}<span class="etiqueta-fase ok">OK</span>{% else %}<span class="etiqueta-fase vez">Meta não atingida</span>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="small mb-0" style="color:var(--muted)">Nenhuma análise registrada ainda. <a class="link-sutil" href="/jogo">Monte sua primeira combinação →</a></p>
+  {% endif %}
+</section>
+
+<section class="cartao fade-up">
+  <h2 class="titulo-secao">{{ icone('reiniciar') }} Recomeçar</h2>
+  <p class="small" style="color:var(--muted)">O progresso é individual e fica salvo neste navegador. O ranking entre participantes pode ser habilitado pelo professor em uma próxima etapa.</p>
+  <form method="post" action="/reiniciar" onsubmit="return confirm('Zerar todo o progresso e começar de novo?');">
+    <input type="hidden" name="voltar" value="/progresso">
+    <button class="botao-contorno botao-bloco" type="submit">Reiniciar meu progresso</button>
+  </form>
+</section>
+{% endblock %}

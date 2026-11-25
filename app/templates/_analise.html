@@ -1,0 +1,145 @@
+{#- Resultado da análise da IA (usado pela análise digital e pela análise por foto). -#}
+{% from "_icones.html" import icone %}
+{% set pts = relatorio.pontuacao.pontos %}
+{% set classe_faixa = '' if pts >= 70 else ('media' if pts >= 40 else 'baixa') %}
+
+<div class="ia-topo">
+  <img class="robo" src="/static/robo.svg" alt="Robô assistente da ARborIA">
+  <div class="balao">Aqui está a análise da sua combinação:</div>
+</div>
+
+<section class="cartao nota-card mb-3 fade-up">
+  <div class="rotulo-nota">Nota Final:</div>
+  <div class="nota-linha">
+    <div class="nota-valor">{{ pts|nota10 }}<small> / 10</small></div>
+    <div class="medalha-nota" aria-hidden="true">⭐</div>
+  </div>
+  <span class="faixa-excelente {{ classe_faixa }}">{{ pts|rotulo_nota }}</span>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <h2 class="titulo-secao" style="font-size:1.1rem">Análise Detalhada:</h2>
+
+  <div class="analise-item">
+    <span class="ok {{ '' if relatorio.sinergias else 'aviso' }}">{{ icone('check') if relatorio.sinergias else icone('info') }}</span>
+    <div>
+      <h3>Relação entre os elementos:</h3>
+      {% if relatorio.sinergias %}
+        <p>{{ relatorio.sinergias[0].texto }}</p>
+        {% if relatorio.sinergias|length > 1 %}<p class="sub">+ {{ relatorio.sinergias|length - 1 }} outra(s) relação(ões) identificada(s).</p>{% endif %}
+      {% else %}
+        <p>Ainda não foi possível perceber uma relação clara. Tente ampliar a combinação.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="analise-item">
+    <span class="ok {{ '' if relatorio.pontos_fortes else 'aviso' }}">{{ icone('check') if relatorio.pontos_fortes else icone('info') }}</span>
+    <div>
+      <h3>Impactos Positivos:</h3>
+      {% if relatorio.pontos_fortes %}
+        {% for ponto in relatorio.pontos_fortes[:2] %}<p>{{ ponto }}</p>{% endfor %}
+      {% else %}
+        <p>Inclua uma ficha de solução para ver os impactos positivos.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="analise-item">
+    <span class="ok {{ '' if not relatorio.sugestoes else 'aviso' }}">{{ icone('check') if not relatorio.sugestoes else icone('brilho') }}</span>
+    <div>
+      <h3>Sugestões de Melhoria:</h3>
+      {% if relatorio.sugestoes %}
+        {% for s in relatorio.sugestoes[:2] %}<p>{{ s }}</p>{% endfor %}
+      {% else %}
+        <p>Boa combinação! Continue explorando outros limites.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="cartao cartao-ouro conclusao mb-3 fade-up">
+  <span class="selo-folha" aria-hidden="true">🍃</span>
+  <p class="mb-0" style="font-size:.92rem"><strong>Conclusão:</strong> {{ relatorio.resumo }}</p>
+</section>
+
+{% if relatorio.imagem %}
+<section class="cartao text-center mb-3 fade-up">
+  <img src="{{ relatorio.imagem }}" alt="Foto enviada" class="img-fluid rounded" style="max-height:280px;object-fit:contain">
+  <div class="small mt-2" style="color:var(--muted)">Foto enviada pelo grupo</div>
+</section>
+{% endif %}
+
+<details class="cartao detalhes-ia mb-3 fade-up">
+  <summary>Ver análise completa {{ icone('baixo') }}</summary>
+  <div class="mt-3">
+    <h3 class="titulo-secao" style="font-size:.95rem">Elementos identificados</h3>
+    <div class="mb-2">
+      {% for l in relatorio.fichas_reconhecidas.limites %}<span class="selo-ficha limite">{{ l.codigo }} · {{ l.nome }}{% if l.central %} ★{% endif %}</span>
+      {% else %}<span class="small text-muted">nenhum limite identificado</span>{% endfor %}
+    </div>
+    <div class="mb-2">
+      {% for p in relatorio.fichas_reconhecidas.problematicas %}<span class="selo-ficha problema" title="{{ p.texto }}">{{ p.codigo }}</span>
+      {% else %}<span class="small text-muted">nenhuma problemática identificada</span>{% endfor %}
+    </div>
+    <div class="mb-3">
+      {% for i in relatorio.fichas_reconhecidas.intervencoes %}<span class="selo-ficha solucao" title="{{ i.texto }}">{{ i.codigo }}</span>
+      {% else %}<span class="small text-muted">nenhuma solução identificada</span>{% endfor %}
+    </div>
+
+    {% if relatorio.sinergias %}
+    <h3 class="titulo-secao" style="font-size:.95rem">Relações entre limite e problemática</h3>
+    {% for s in relatorio.sinergias %}<div class="caixa-ia caixa-ciano">{{ s.texto }}</div>{% endfor %}
+    {% endif %}
+
+    {% if relatorio.tradeoffs %}
+    <h3 class="titulo-secao mt-3" style="font-size:.95rem">Efeitos colaterais</h3>
+    {% for t in relatorio.tradeoffs %}<div class="caixa-ia caixa-laranja"><strong>Atenção:</strong> {{ t.texto }}</div>{% endfor %}
+    {% endif %}
+
+    {% if relatorio.pontos_fortes|length > 2 or relatorio.sugestoes|length > 2 %}
+    <h3 class="titulo-secao mt-3" style="font-size:.95rem">Mais observações</h3>
+    {% for p in relatorio.pontos_fortes[2:] %}<div class="caixa-ia">{{ p }}</div>{% endfor %}
+    {% for s in relatorio.sugestoes[2:] %}<div class="caixa-ia caixa-ciano">{{ s }}</div>{% endfor %}
+    {% endif %}
+
+    <h3 class="titulo-secao mt-3" style="font-size:.95rem">Perguntas para pensar</h3>
+    {% for p in relatorio.perguntas_reflexivas[:4] %}<div class="caixa-ia caixa-roxa">{{ p }}</div>{% endfor %}
+
+    {% if relatorio.lacunas %}
+    <h3 class="titulo-secao mt-3" style="font-size:.95rem">Limites ainda não conectados</h3>
+    <div class="mb-2">
+      {% for l in relatorio.lacunas %}<span class="chip me-1 mb-1">{{ l.nome }}{% if l.central %} ★{% endif %}</span>{% endfor %}
+    </div>
+    <p class="small text-muted">★ = limite central (clima ou biodiversidade).</p>
+    {% endif %}
+
+    <h3 class="titulo-secao mt-3" style="font-size:.95rem">Como a nota foi calculada</h3>
+    <table class="rubrica">
+      <thead><tr><th>Critério</th><th style="text-align:right">Pontos</th></tr></thead>
+      <tbody>
+        {% for d in relatorio.pontuacao.detalhes %}<tr><td>{{ d.item }}</td><td>+{{ d.pontos }}</td></tr>{% endfor %}
+      </tbody>
+    </table>
+    <p class="small text-muted mt-3 mb-0">{{ relatorio.modo }}{% if relatorio.aviso_modo %} · {{ relatorio.aviso_modo }}{% endif %}</p>
+    <p class="small text-muted mt-1 mb-0">{{ relatorio.advertencia }}</p>
+  </div>
+</details>
+
+{% if relatorio.leitura_bruta and (relatorio.leitura_bruta.texto or relatorio.leitura_bruta.avisos) %}
+<details class="mb-3">
+  <summary class="small text-muted" style="cursor:pointer">Ver detalhes técnicos da leitura</summary>
+  {% if relatorio.leitura_bruta.avisos %}
+    <ul class="small text-muted mt-2">{% for aviso in relatorio.leitura_bruta.avisos %}<li>{{ aviso }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if relatorio.leitura_bruta.texto %}<pre class="p-3 small mt-2">{{ relatorio.leitura_bruta.texto }}</pre>{% endif %}
+</details>
+{% endif %}
+
+<div class="d-grid gap-2 fade-up">
+  <a href="/jogo" class="botao-principal">{{ icone('voltar') }} Voltar ao Jogo</a>
+  <div class="row g-2">
+    <div class="col-6"><a href="/foto" class="botao-contorno botao-pequeno botao-bloco">{{ icone('camera') }} Outra foto</a></div>
+    <div class="col-6"><a href="/jogo" class="botao-contorno botao-pequeno botao-bloco">{{ icone('alvo') }} Desafios</a></div>
+  </div>
+</div>

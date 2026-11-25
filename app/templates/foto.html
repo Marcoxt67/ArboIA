@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Analisar com Foto — ARborIA{% endblock %}
+{% block nav_ativo %}ia{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/ia" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}{{ icone('camera') }}<span>Analisar com Foto</span>{% endblock %}
+{% block subtitulo %}<p class="topo-subtitulo">Fotografe suas fichas<br>para uma análise precisa!</p>{% endblock %}
+
+{% block conteudo %}
+<form action="/analisar" method="post" enctype="multipart/form-data">
+  <input type="file" class="d-none" id="foto-camera" accept="image/*" capture="environment">
+  <input type="file" class="d-none" id="imagem" name="imagem" accept="image/*">
+
+  <div class="visor vazio" id="visor">
+    <span class="canto tl"></span><span class="canto tr"></span><span class="canto bl"></span><span class="canto br"></span>
+    <img id="preview-imagem" class="d-none" alt="Prévia da foto das fichas">
+    <div class="dica" id="visor-dica">
+      {{ icone('camera') }}
+      <div>Enquadre todas as fichas da combinação.<br><small>Fichas separadas, boa luz e fundo com contraste.</small></div>
+    </div>
+  </div>
+
+  <div class="controles-camera">
+    <button type="button" class="botao-icone abrir-galeria galeria" aria-label="Escolher da galeria" style="width:54px;height:54px;border-radius:16px">{{ icone('imagem') }}</button>
+    <button type="button" class="obturador abrir-camera" aria-label="Tirar foto"><span></span></button>
+    <span></span>
+  </div>
+
+  <details class="cartao cartao-suave mb-3">
+    <summary style="cursor:pointer;font-weight:600">Texto das fichas <span class="text-muted" style="font-weight:400">(opcional)</span></summary>
+    <textarea class="form-control mt-2" id="texto_manual" name="texto_manual" rows="2"
+              placeholder="Ex.: L1 Mudança climática P1.1 I1.1 ônibus elétricos"></textarea>
+    <div class="form-text">Ajuda se a foto estiver escura ou com letra manuscrita.</div>
+  </details>
+
+  <button type="submit" class="botao-principal botao-bloco desativado" id="botao-enviar-foto" disabled>
+    {{ icone('brilho') }} Analisar com IA
+  </button>
+  <p class="small text-center mt-3" style="color:var(--muted)">
+    No celular, o navegador pedirá autorização para usar a câmera. A imagem é enviada apenas para esta plataforma.
+  </p>
+</form>
+{% endblock %}

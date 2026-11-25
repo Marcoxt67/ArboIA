@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>ARboIA — Fichas para impressão</title>
+<style>
+  @page { size: A4; margin: 10mm; }
+  body { font-family: Arial, sans-serif; font-size: 9pt; color: #222; }
+  h1 { font-size: 16pt; margin: 0 0 4mm; }
+  .intro { margin-bottom: 6mm; font-size: 9pt; color: #555; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .sheet { border: 1px dashed #999; border-radius: 3mm; padding: 3mm;
+            break-inside: avoid; min-height: 82mm; }
+  .limite { border-top: 5px solid #0d6efd; }
+  .problema { border-top: 5px solid #fd7e14; }
+  .intervencao { border-top: 5px solid #198754; }
+  .topo { display:flex; gap:2mm; align-items:baseline; border-bottom:1px solid #ddd;
+           padding-bottom:2mm; margin-bottom:2mm; }
+  .codigo { font-family: monospace; font-size: 8pt; color:#666; }
+  .titulo { font-weight: bold; font-size: 10pt; }
+  .meta { font-size: 8pt; margin-bottom: 2mm; }
+  .zonas { font-size: 7.5pt; margin-bottom: 2mm; }
+  .segura { color:#198754; } .incerteza { color:#b27a00; } .risco { color:#c62828; }
+  .desc { font-size: 8pt; color:#444; margin-bottom:2mm; }
+  .secao { font-size: 7.5pt; font-weight:bold; color:#666; margin:2mm 0 1mm; }
+  .p { background:#fff6ec; border-left:3px solid #fd7e14; padding:1.5mm 2mm;
+        margin-bottom:1.5mm; font-size:8pt; }
+  .i { background:#edf8f1; border-left:3px solid #198754; padding:1.5mm 2mm;
+        margin-bottom:1.5mm; font-size:8pt; }
+  .rodape { margin-top:3mm; font-size:7pt; color:#888; }
+  @media print { .intro { display:none; } }
+</style>
+</head>
+<body>
+  <h1>🌳 ARboIA — Fichas do jogo</h1>
+  <div class="intro">
+    Recorte cada ficha pelas bordas tracejadas. 9 fichas azuis (limites),
+    9 folhas laranjas com 3 problemáticas cada, 9 folhas verdes com 3 intervenções cada.
+    Use Ctrl+P para imprimir. Modelo: Steffen et al. (2015).
+  </div>
+  <div class="grid">
+    
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L1</span>
+            <span class="titulo">🔵 Mudança climática ★</span>
+          </div>
+          <div class="meta"><b>Variável:</b> CO2 atmosférico (ppm) e forçamento radiativo (W/m2)</div>
+          <div class="zonas">
+            <div class="segura">Segura: CO2 &lt; 350 ppm; forçamento &lt; 1 W/m2</div>
+            <div class="incerteza">Incerteza: 350-550 ppm; 1-2 W/m2</div>
+            <div class="risco">Risco: &gt; 550 ppm; &gt; 2 W/m2</div>
+          </div>
+          <div class="desc">Regula temperatura média global, regime de chuvas e estabilidade das calotas polares.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P1.1</b> Emissoes de CO2 do transporte urbano crescem 4% ao ano</div><div class="p"><b>P1.2</b> Onda de calor prolongada derruba a producao de alimentos</div><div class="p"><b>P1.3</b> Degelo acelerado altera correntes oceanicas e o clima regional</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I1.1</b> Eletrificacao da frota de onibus com energia renovavel</div><div class="i"><b>I1.2</b> Restauracao de manguezais e florestas urbanas como sumidouros de carbono</div><div class="i"><b>I1.3</b> Agroecologia com plantio direto e integracao lavoura-pecuaria</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L1-P</span>
+            <span class="titulo">🟠 Mudança climática</span></div>
+          <div class="p"><b>P1.1</b> Emissoes de CO2 do transporte urbano crescem 4% ao ano</div><div class="p"><b>P1.2</b> Onda de calor prolongada derruba a producao de alimentos</div><div class="p"><b>P1.3</b> Degelo acelerado altera correntes oceanicas e o clima regional</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L1-I</span>
+            <span class="titulo">🟢 Mudança climática</span></div>
+          <div class="i"><b>I1.1</b> Eletrificacao da frota de onibus com energia renovavel</div><div class="i"><b>I1.2</b> Restauracao de manguezais e florestas urbanas como sumidouros de carbono</div><div class="i"><b>I1.3</b> Agroecologia com plantio direto e integracao lavoura-pecuaria</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L2</span>
+            <span class="titulo">🔵 Perda de biodiversidade funcional ★</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Diversidade funcional de especies (indice de redundancia ecologica)</div>
+          <div class="zonas">
+            <div class="segura">Segura: Perda &lt; 10% da diversidade funcional</div>
+            <div class="incerteza">Incerteza: Perda de 10-30%</div>
+            <div class="risco">Risco: &gt; 30% de perda</div>
+          </div>
+          <div class="desc">Mede a funcao ecologica exercida pelas especies, nao apenas a contagem delas.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P2.1</b> Abate de polinizadores por inseticidas em monoculturas</div><div class="p"><b>P2.2</b> Fragmentacao de habitat isola populacoes em ilhas de floresta</div><div class="p"><b>P2.3</b> Especies oportunistas substituem vegetacao nativa em pastagens</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I2.1</b> Corredores ecologicos conectando fragmentos de floresta</div><div class="i"><b>I2.2</b> Agrofloresta com especies nativas e polinizadores locais</div><div class="i"><b>I2.3</b> Controle biologico de pragas em vez de agrotoxicos</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L2-P</span>
+            <span class="titulo">🟠 Perda de biodiversidade funcional</span></div>
+          <div class="p"><b>P2.1</b> Abate de polinizadores por inseticidas em monoculturas</div><div class="p"><b>P2.2</b> Fragmentacao de habitat isola populacoes em ilhas de floresta</div><div class="p"><b>P2.3</b> Especies oportunistas substituem vegetacao nativa em pastagens</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L2-I</span>
+            <span class="titulo">🟢 Perda de biodiversidade funcional</span></div>
+          <div class="i"><b>I2.1</b> Corredores ecologicos conectando fragmentos de floresta</div><div class="i"><b>I2.2</b> Agrofloresta com especies nativas e polinizadores locais</div><div class="i"><b>I2.3</b> Controle biologico de pragas em vez de agrotoxicos</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L3</span>
+            <span class="titulo">🔵 Extinção biótica</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Taxa de extincao (E/MSY)</div>
+          <div class="zonas">
+            <div class="segura">Segura: &lt; 10 E/MSY</div>
+            <div class="incerteza">Incerteza: 10-100 E/MSY</div>
+            <div class="risco">Risco: &gt; 100 E/MSY</div>
+          </div>
+          <div class="desc">Extincao e irreversivel; taxa atual estimada entre 100 e 1000 vezes acima do background geologico.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P3.1</b> Trafico de animais silvestres retira especies-chave</div><div class="p"><b>P3.2</b> Especies endemicas desaparecem antes de serem catalogadas</div><div class="p"><b>P3.3</b> Pesca predatoria colapsa populações de grandes peixes</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I3.1</b> Unidades de conservacao com manejo participativo</div><div class="i"><b>I3.2</b> Reproducao e reintroducao de especies ameaçadas</div><div class="i"><b>I3.3</b> Monitoramento por DNA ambiental (eDNA) em rios</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L3-P</span>
+            <span class="titulo">🟠 Extinção biótica</span></div>
+          <div class="p"><b>P3.1</b> Trafico de animais silvestres retira especies-chave</div><div class="p"><b>P3.2</b> Especies endemicas desaparecem antes de serem catalogadas</div><div class="p"><b>P3.3</b> Pesca predatoria colapsa populações de grandes peixes</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L3-I</span>
+            <span class="titulo">🟢 Extinção biótica</span></div>
+          <div class="i"><b>I3.1</b> Unidades de conservacao com manejo participativo</div><div class="i"><b>I3.2</b> Reproducao e reintroducao de especies ameaçadas</div><div class="i"><b>I3.3</b> Monitoramento por DNA ambiental (eDNA) em rios</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L4</span>
+            <span class="titulo">🔵 Interferência no ciclo do nitrogênio</span>
+          </div>
+          <div class="meta"><b>Variável:</b> N fixado industrial e agrícola (Tg N/ano)</div>
+          <div class="zonas">
+            <div class="segura">Segura: &lt; 35 Tg N/ano</div>
+            <div class="incerteza">Incerteza: 35-75 Tg N/ano</div>
+            <div class="risco">Risco: &gt; 75 Tg N/ano</div>
+          </div>
+          <div class="desc">Excesso de N causa eutrofizacao, mortandade de peixes e emissoes de N2O.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P4.1</b> Fertilizantes nitrogenados causam floracao de algas toxicas</div><div class="p"><b>P4.2</b> Monocultura de leguminosas acidifica o solo</div><div class="p"><b>P4.3</b> Dejetos de suinocultura contaminam lençol freatico</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I4.1</b> Adubacao de precisao com sensores</div><div class="i"><b>I4.2</b> Rotacao de culturas com leguminosas e adubo verde</div><div class="i"><b>I4.3</b> Wetlands construidas para tratamento de efluentes</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L4-P</span>
+            <span class="titulo">🟠 Interferência no ciclo do nitrogênio</span></div>
+          <div class="p"><b>P4.1</b> Fertilizantes nitrogenados causam floracao de algas toxicas</div><div class="p"><b>P4.2</b> Monocultura de leguminosas acidifica o solo</div><div class="p"><b>P4.3</b> Dejetos de suinocultura contaminam lençol freatico</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L4-I</span>
+            <span class="titulo">🟢 Interferência no ciclo do nitrogênio</span></div>
+          <div class="i"><b>I4.1</b> Adubacao de precisao com sensores</div><div class="i"><b>I4.2</b> Rotacao de culturas com leguminosas e adubo verde</div><div class="i"><b>I4.3</b> Wetlands construidas para tratamento de efluentes</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L5</span>
+            <span class="titulo">🔵 Interferência no ciclo do fósforo</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Fluxo de P para os oceanos (Tg P/ano)</div>
+          <div class="zonas">
+            <div class="segura">Segura: &lt; 11 Tg P/ano</div>
+            <div class="incerteza">Incerteza: 11-100 Tg P/ano</div>
+            <div class="risco">Risco: &gt; 100 Tg P/ano</div>
+          </div>
+          <div class="desc">Fosforo e finito e essencial para DNA e ATP; excesso causa eutrofizacao.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P5.1</b> Mineracao de fosfato contamina rios com metais pesados</div><div class="p"><b>P5.2</b> Detergentes e esgoto despejam fosfato em lagoas urbanas</div><div class="p"><b>P5.3</b> Dependencia de fertilizantes importados aumenta vulnerabilidade</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I5.1</b> Recuperacao de fosforo do esgoto por struvita</div><div class="i"><b>I5.2</b> Compostagem de residuos organicos urbanos</div><div class="i"><b>I5.3</b> Detergentes sem fosfato e saneamento basico universal</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L5-P</span>
+            <span class="titulo">🟠 Interferência no ciclo do fósforo</span></div>
+          <div class="p"><b>P5.1</b> Mineracao de fosfato contamina rios com metais pesados</div><div class="p"><b>P5.2</b> Detergentes e esgoto despejam fosfato em lagoas urbanas</div><div class="p"><b>P5.3</b> Dependencia de fertilizantes importados aumenta vulnerabilidade</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L5-I</span>
+            <span class="titulo">🟢 Interferência no ciclo do fósforo</span></div>
+          <div class="i"><b>I5.1</b> Recuperacao de fosforo do esgoto por struvita</div><div class="i"><b>I5.2</b> Compostagem de residuos organicos urbanos</div><div class="i"><b>I5.3</b> Detergentes sem fosfato e saneamento basico universal</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L6</span>
+            <span class="titulo">🔵 Mudança no uso do solo</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Cobertura florestal em biomas tropicais, temperados e boreais</div>
+          <div class="zonas">
+            <div class="segura">Segura: &gt; 85% da cobertura original</div>
+            <div class="incerteza">Incerteza: 60-85%</div>
+            <div class="risco">Risco: &lt; 60%</div>
+          </div>
+          <div class="desc">Conversao de florestas altera albedo, ciclo da agua e estoques de carbono.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P6.1</b> Desmatamento para expansao da soja no Cerrado</div><div class="p"><b>P6.2</b> Pastagens degradadas ocupam terras sem ganho de produtividade</div><div class="p"><b>P6.3</b> Loteamento irregular em encostas aumenta deslizamentos</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I6.1</b> Intensificacao sustentavel de pastagens existentes</div><div class="i"><b>I6.2</b> Restauracao de APPs com mudas nativas</div><div class="i"><b>I6.3</b> Plano diretor com zoneamento ecologico-economico</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L6-P</span>
+            <span class="titulo">🟠 Mudança no uso do solo</span></div>
+          <div class="p"><b>P6.1</b> Desmatamento para expansao da soja no Cerrado</div><div class="p"><b>P6.2</b> Pastagens degradadas ocupam terras sem ganho de produtividade</div><div class="p"><b>P6.3</b> Loteamento irregular em encostas aumenta deslizamentos</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L6-I</span>
+            <span class="titulo">🟢 Mudança no uso do solo</span></div>
+          <div class="i"><b>I6.1</b> Intensificacao sustentavel de pastagens existentes</div><div class="i"><b>I6.2</b> Restauracao de APPs com mudas nativas</div><div class="i"><b>I6.3</b> Plano diretor com zoneamento ecologico-economico</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L7</span>
+            <span class="titulo">🔵 Consumo de água doce</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Extracao anual de agua doce (km3/ano)</div>
+          <div class="zonas">
+            <div class="segura">Segura: &lt; 4000 km3/ano</div>
+            <div class="incerteza">Incerteza: 4000-6000 km3/ano</div>
+            <div class="risco">Risco: &gt; 6000 km3/ano</div>
+          </div>
+          <div class="desc">Agua doce acessivel e menos de 1% do total planetario e distribuida de forma desigual.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P7.1</b> Irrigacao ineficiente consome 70% da agua doce</div><div class="p"><b>P7.2</b> Captacao irregular rebaixa o lençol freatico urbano</div><div class="p"><b>P7.3</b> Contaminacao por esgoto inutiliza rios para abastecimento</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I7.1</b> Irrigacao por gotejamento com sensores de umidade</div><div class="i"><b>I7.2</b> Captacao de agua da chuva e cisternas escolares</div><div class="i"><b>I7.3</b> Tratamento e reuso de agua cinza em edificios publicos</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L7-P</span>
+            <span class="titulo">🟠 Consumo de água doce</span></div>
+          <div class="p"><b>P7.1</b> Irrigacao ineficiente consome 70% da agua doce</div><div class="p"><b>P7.2</b> Captacao irregular rebaixa o lençol freatico urbano</div><div class="p"><b>P7.3</b> Contaminacao por esgoto inutiliza rios para abastecimento</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L7-I</span>
+            <span class="titulo">🟢 Consumo de água doce</span></div>
+          <div class="i"><b>I7.1</b> Irrigacao por gotejamento com sensores de umidade</div><div class="i"><b>I7.2</b> Captacao de agua da chuva e cisternas escolares</div><div class="i"><b>I7.3</b> Tratamento e reuso de agua cinza em edificios publicos</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L8</span>
+            <span class="titulo">🔵 Acidificação dos oceanos</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Grau de saturacao de aragonita (Omega) na superficie</div>
+          <div class="zonas">
+            <div class="segura">Segura: Omega &gt; 3,0</div>
+            <div class="incerteza">Incerteza: 2,5-3,0</div>
+            <div class="risco">Risco: Omega &lt; 2,5</div>
+          </div>
+          <div class="desc">Absorcao de CO2 forma acido carbonico e dificulta conchas e esqueletos de corais.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P8.1</b> Branqueamento de corais por temperatura e acidez</div><div class="p"><b>P8.2</b> Reducao de crustaceos e moluscos afeta a pesca artesanal</div><div class="p"><b>P8.3</b> Recifes perdem funcao de quebra-mar e aumenta erosao costeira</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I8.1</b> Reducao de emissoes de CO2 na causa-raiz</div><div class="i"><b>I8.2</b> Restauracao de recifes com corais resistentes ao calor</div><div class="i"><b>I8.3</b> Protecao de manguezais que regulam pH costeiro</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L8-P</span>
+            <span class="titulo">🟠 Acidificação dos oceanos</span></div>
+          <div class="p"><b>P8.1</b> Branqueamento de corais por temperatura e acidez</div><div class="p"><b>P8.2</b> Reducao de crustaceos e moluscos afeta a pesca artesanal</div><div class="p"><b>P8.3</b> Recifes perdem funcao de quebra-mar e aumenta erosao costeira</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L8-I</span>
+            <span class="titulo">🟢 Acidificação dos oceanos</span></div>
+          <div class="i"><b>I8.1</b> Reducao de emissoes de CO2 na causa-raiz</div><div class="i"><b>I8.2</b> Restauracao de recifes com corais resistentes ao calor</div><div class="i"><b>I8.3</b> Protecao de manguezais que regulam pH costeiro</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+        <div class="sheet limite">
+          <div class="topo">
+            <span class="codigo">L9</span>
+            <span class="titulo">🔵 Aerossóis atmosféricos</span>
+          </div>
+          <div class="meta"><b>Variável:</b> Profundidade optica de aerossóis (AOD)</div>
+          <div class="zonas">
+            <div class="segura">Segura: AOD &lt; 0,25</div>
+            <div class="incerteza">Incerteza: 0,25-0,50</div>
+            <div class="risco">Risco: AOD &gt; 0,50</div>
+          </div>
+          <div class="desc">Particulas afetam saude respiratoria e clima; algumas resfriam, outras aquecem. Maior incerteza do modelo.</div>
+          <div class="secao">PROBLEMÁTICAS</div>
+          <div class="p"><b>P9.1</b> Fumaca de queimadas agrava crise respiratoria urbana</div><div class="p"><b>P9.2</b> Material particulado de industrias e veiculos aumenta mortes</div><div class="p"><b>P9.3</b> Poeira do Saara transporta nutrientes e patogenos ao Atlantico</div>
+          <div class="secao">INTERVENÇÕES</div>
+          <div class="i"><b>I9.1</b> Controle de emissões veiculares e filtros industriais</div><div class="i"><b>I9.2</b> Manejo integrado do fogo em biomas secos</div><div class="i"><b>I9.3</b> Monitoramento por satelite e sensores de baixo custo</div>
+        </div>
+
+        <div class="sheet problema">
+          <div class="topo"><span class="codigo">L9-P</span>
+            <span class="titulo">🟠 Aerossóis atmosféricos</span></div>
+          <div class="p"><b>P9.1</b> Fumaca de queimadas agrava crise respiratoria urbana</div><div class="p"><b>P9.2</b> Material particulado de industrias e veiculos aumenta mortes</div><div class="p"><b>P9.3</b> Poeira do Saara transporta nutrientes e patogenos ao Atlantico</div>
+          <div class="rodape">Cenários-problema para a rodada.</div>
+        </div>
+
+        <div class="sheet intervencao">
+          <div class="topo"><span class="codigo">L9-I</span>
+            <span class="titulo">🟢 Aerossóis atmosféricos</span></div>
+          <div class="i"><b>I9.1</b> Controle de emissões veiculares e filtros industriais</div><div class="i"><b>I9.2</b> Manejo integrado do fogo em biomas secos</div><div class="i"><b>I9.3</b> Monitoramento por satelite e sensores de baixo custo</div>
+          <div class="rodape">Propostas de intervenção.</div>
+        </div>
+        
+  </div>
+</body>
+</html>

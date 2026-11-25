@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Sobre o Projeto — ARborIA{% endblock %}
+{% block nav_ativo %}perfil{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/configuracoes" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}{{ icone('info') }}<span>Sobre o Projeto</span>{% endblock %}
+{% block topo_direita %}<span class="topo-vazio"></span>{% endblock %}
+
+{% block conteudo %}
+<section class="sobre-topo fade-up">
+  <div class="hero-terra-caixa"><img src="/static/terra.svg" alt="Planeta Terra com folhas e circuitos" class="hero-terra"></div>
+  <h2 class="marca-logo">ARbor<b>IA</b></h2>
+  <p class="marca-sub mb-3">Aprenda. Pense. Preserve.</p>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <p class="mb-0" style="font-size:.92rem">
+    Um jogo didático inovador que une educação ambiental, gamificação e inteligência artificial para ajudar você a
+    entender os <strong>9 limites planetários</strong> e construir um futuro mais sustentável.
+  </p>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <h2 class="titulo-secao">Nossos Objetivos:</h2>
+  <ul class="objetivos">
+    <li><span class="ok">{{ icone('check') }}</span> Promover o aprendizado ativo</li>
+    <li><span class="ok">{{ icone('check') }}</span> Estimular o pensamento crítico</li>
+    <li><span class="ok">{{ icone('check') }}</span> Incentivar ações sustentáveis</li>
+  </ul>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <h2 class="titulo-secao">{{ icone('cpu') }} Como a IA funciona</h2>
+  <p class="small mb-2">Duas camadas de leitura, com fallback automático:</p>
+  <ol class="small mb-3 ps-3">
+    <li class="mb-2"><strong>Modo local:</strong> OpenCV + Tesseract extraem o texto das fichas; um analisador baseado em regras e grafo identifica sinergias e efeitos colaterais.</li>
+    <li><strong>Modo multimodal:</strong> com chave de API configurada, um modelo de visão interpreta a imagem diretamente e devolve JSON estruturado.</li>
+  </ol>
+  <div class="caixa-ia caixa-ciano small mb-0">O sistema não entrega a resposta correta. Ele devolve perguntas, relações e lacunas para alimentar a discussão em sala.</div>
+</section>
+
+<section class="cartao mb-3 fade-up">
+  <h2 class="titulo-secao">{{ icone('livro') }} Ficha técnica</h2>
+  <table class="tabela-simples">
+    <tbody>
+      <tr><th>Modelo adotado</th><td>{{ metadados.versao_modelo }}</td></tr>
+      <tr><th>Total de limites</th><td>{{ metadados.total_limites }}</td></tr>
+      <tr><th>Versão da base</th><td>{{ metadados.versao_base }}</td></tr>
+      <tr><th>Idioma</th><td>{{ metadados.idioma }}</td></tr>
+      <tr><th>Público</th><td>Ensino médio</td></tr>
+    </tbody>
+  </table>
+  <p class="small text-muted mt-3 mb-0">{{ metadados.nota }}</p>
+</section>
+
+<p class="frase-final mt-4 fade-up">Juntos por um planeta<br>mais verde! 🌱</p>
+{% endblock %}

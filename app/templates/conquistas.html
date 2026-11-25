@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Conquistas — ARborIA{% endblock %}
+{% block nav_ativo %}perfil{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/perfil" aria-label="Voltar">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}{{ icone('trofeu') }}<span>Conquistas</span>{% endblock %}
+
+{% block conteudo %}
+{% set total = progresso.conquistas|length %}
+{% set ganhas = progresso.conquistas|selectattr('desbloqueada')|list|length %}
+<div class="text-center fade-up">
+  <div class="trofeu-grande" aria-hidden="true">🏆</div>
+  <h2 class="h4 fw-bold mb-1">Suas Conquistas</h2>
+  <p class="small" style="color:var(--muted)">{{ ganhas }} de {{ total }} desbloqueadas</p>
+</div>
+
+{% for c in progresso.conquistas|sort(attribute='desbloqueada', reverse=True) %}
+<article class="cartao conquista {{ '' if c.desbloqueada else 'bloqueada' }} fade-up">
+  <span class="emblema" aria-hidden="true">{{ c.icone }}</span>
+  <div class="info">
+    <strong>{{ c.nome }}</strong>
+    <small>{{ c.descricao }}</small>
+    {% if not c.desbloqueada and c.meta > 1 %}
+      <div class="barra-progresso barra-ouro" role="progressbar" aria-valuemin="0" aria-valuemax="{{ c.meta }}" aria-valuenow="{{ c.atual }}"><div style="width:{{ (c.atual / c.meta * 100)|round|int }}%"></div></div>
+    {% endif %}
+  </div>
+  {% if c.desbloqueada %}
+    <span class="estado ok" aria-label="Desbloqueada">{{ icone('check') }}</span>
+  {% elif c.meta > 1 %}
+    <span class="passo">{{ c.atual }}/{{ c.meta }}</span>
+  {% else %}
+    <span class="estado trava" aria-label="Bloqueada">{{ icone('cadeado') }}</span>
+  {% endif %}
+</article>
+{% endfor %}
+
+<div class="d-grid mt-3"><a href="/jogo" class="botao-principal">{{ icone('jogar') }} Jogar para desbloquear</a></div>
+{% endblock %}

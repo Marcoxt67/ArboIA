@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Resultado da fase {{ fase.numero }} — ARborIA{% endblock %}
+{% block nav_ativo %}jogar{% endblock %}
+{% block topo_esquerda %}<a class="botao-icone" href="/jogo" aria-label="Voltar à trilha">{{ icone('voltar') }}</a>{% endblock %}
+{% block topo_titulo %}<span>Resultado · Fase {{ '%02d'|format(fase.numero) }}</span>{% endblock %}
+
+{% block conteudo %}
+{% if erro %}
+  <div class="cartao cartao-ouro text-center">
+    <div style="font-size:2.6rem">😕</div>
+    <h2 class="h5 fw-bold">Não deu para analisar</h2>
+    <p>{{ erro }}</p>
+    <a class="botao-principal" href="/fase/{{ fase.numero }}">{{ icone('reiniciar') }} Tentar novamente</a>
+  </div>
+{% else %}
+  <section class="cartao nota-card mb-3 fade-up">
+    <div class="rotulo-nota">{% if pontuacao.atingiu %}🎉 Fase {{ '%02d'|format(fase.numero) }} concluída!{% else %}🔁 Quase lá — tente de novo{% endif %}</div>
+    <div class="nota-linha">
+      <div class="nota-valor">{{ pontuacao.pontos|nota10 }}<small> / 10</small></div>
+      <div class="medalha-nota" aria-hidden="true">{{ '⭐' if pontuacao.atingiu else '🌱' }}</div>
+    </div>
+    <span class="faixa-excelente {{ '' if pontuacao.atingiu else 'media' }}">{{ pontuacao.classificacao }}</span>
+    <p class="small mt-4 mb-1">
+      {% if pontuacao.atingiu %}
+        Você atingiu a meta ({{ pontuacao.meta }} pontos) e {% if fase.numero < progresso.total_fases %}desbloqueou a próxima fase.{% else %}completou a trilha! 🏆{% endif %}
+      {% else %}
+        Faltaram <strong>{{ pontuacao.pontos_faltantes }}</strong> pontos para a meta desta fase. Revise as fichas e tente outra combinação.
+      {% endif %}
+    </p>
+    <div class="d-flex justify-content-between small mt-3"><span>Sua nota: {{ pontuacao.pontos }}</span><span>Meta: {{ pontuacao.meta }}</span></div>
+    <div class="barra-progresso"><div style="width:{{ pontuacao.pontos }}%"></div></div>
+    <p class="small mt-2 mb-0" style="color:var(--muted)">{{ pontuacao.resumo_rubrica }}</p>
+  </section>
+
+  <section class="cartao mb-3 fade-up">
+    <h2 class="titulo-secao">{{ icone('grafico') }} Como você pontuou</h2>
+    <table class="rubrica">
+      <thead><tr><th>Critério</th><th style="text-align:right">Pontos</th></tr></thead>
+      <tbody>
+        {% for d in pontuacao.detalhes %}
+        <tr><td>{{ d.item }}<div class="small" style="color:var(--muted);font-weight:400">{{ d.observacao }}</div></td>
+            <td style="color:{{ 'var(--neon)' if d.pontos else '#ff8a8a' }}">+{{ d.pontos }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  {% if relatorio.imagem %}
+  <section class="cartao text-center mb-3 fade-up">
+    <img src="{{ relatorio.imagem }}" alt="Foto enviada" class="img-fluid rounded" style="max-height:240px;object-fit:contain">
+    <div class="small mt-2" style="color:var(--muted)">Sua combinação</div>
+  </section>
+  {% endif %}
+
+  {% if relatorio.sinergias %}
+  <section class="cartao mb-3 fade-up"><h2 class="titulo-secao">{{ icone('brilho') }} Sinergias</h2>
+    {% for s in relatorio.sinergias %}<div class="caixa-ia">{{ s.texto }}</div>{% endfor %}</section>
+  {% endif %}
+  {% if relatorio.tradeoffs %}
+  <section class="cartao mb-3 fade-up"><h2 class="titulo-secao">{{ icone('info') }} Efeitos colaterais</h2>
+    {% for t in relatorio.tradeoffs %}<div class="caixa-ia caixa-laranja">{{ t.texto }}</div>{% endfor %}</section>
+  {% endif %}
+  <section class="cartao mb-3 fade-up"><h2 class="titulo-secao">{{ icone('ajuda') }} Para a roda de conversa</h2>
+    {% for p in relatorio.perguntas_reflexivas[:4] %}<div class="caixa-ia caixa-roxa">{{ p }}</div>{% endfor %}</section>
+
+  <div class="d-grid gap-2 fade-up">
+    {% if pontuacao.atingiu and fase.numero < progresso.total_fases %}
+      <a href="/fase/{{ progresso.fase_atual }}" class="botao-principal">{{ icone('play', 'ico-cheio') }} Ir para a fase {{ progresso.fase_atual }}</a>
+    {% elif pontuacao.atingiu %}
+      <a href="/jogo" class="botao-principal">🏆 Ver trilha completa</a>
+    {% else %}
+      <a href="/fase/{{ fase.numero }}" class="botao-principal">{{ icone('reiniciar') }} Tentar esta fase de novo</a>
+    {% endif %}
+    <a href="/jogo" class="botao-contorno">Ver todas as fases</a>
+  </div>
+
+  <p class="small text-center mt-3" style="color:var(--muted)">Modo da IA: {{ relatorio.modo }} · {{ relatorio.aviso_modo }}<br>{{ relatorio.advertencia }}</p>
+{% endif %}
+{% endblock %}

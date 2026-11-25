@@ -1,0 +1,113 @@
+{% from "_icones.html" import icone %}
+{%- set nav_atual = self.nav_ativo()|trim -%}
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07301d">
+  <meta name="description" content="ARborIA — aprenda, pense e preserve: plataforma de aprendizagem ambiental com inteligência artificial sobre os 9 limites planetários.">
+  <title>{% block titulo %}ARborIA{% endblock %}</title>
+  <link rel="icon" href="/static/terra.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/estilo.css?v=3">
+  <script>
+    /* Aplica o tema salvo antes de pintar a página (evita "piscar"). */
+    try {
+      if (localStorage.getItem('arboia-tema') === 'claro') {
+        document.documentElement.dataset.tema = 'claro';
+        document.documentElement.dataset.bsTheme = 'light';
+      }
+    } catch (e) {}
+  </script>
+  {% block estilos_extra %}{% endblock %}
+</head>
+<body>
+
+<div class="app-shell">
+  <header class="topo">
+    {% block topo_esquerda %}
+    <button class="botao-icone" type="button" data-bs-toggle="offcanvas" data-bs-target="#menu-app"
+            aria-controls="menu-app" aria-label="Abrir menu">{{ icone('menu') }}</button>
+    {% endblock %}
+
+    <h1 class="topo-titulo">{% block topo_titulo %}{% endblock %}</h1>
+
+    {% block topo_direita %}
+    <a class="botao-icone" href="/perfil" aria-label="Meu perfil">{{ icone('user') }}</a>
+    {% endblock %}
+  </header>
+
+  {% block subtitulo %}{% endblock %}
+
+  <main>
+    {% block conteudo %}{% endblock %}
+  </main>
+</div>
+
+{# Item da navegação inferior destacado: inicio, jogar, limites, ia ou perfil #}
+{% if false %}{% block nav_ativo %}{% endblock %}{% endif %}
+
+<!-- Menu lateral (abre pelo botão do topo) -->
+<div class="offcanvas offcanvas-start menu-app" tabindex="-1" id="menu-app" aria-labelledby="menu-app-titulo">
+  <div class="offcanvas-header">
+    <div class="marca" style="text-align:left">
+      <p class="marca-logo" id="menu-app-titulo" style="font-size:1.6rem">ARbor<b>IA</b></p>
+      <p class="marca-sub" style="font-size:.78rem">Aprenda. Pense. Preserve.</p>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
+  </div>
+  <nav class="menu-links" aria-label="Menu">
+    <a data-nav="/" href="/">{{ icone('home') }} Início</a>
+    <a data-nav="/jogo" href="/jogo">{{ icone('jogar') }} Jogar</a>
+    <a data-nav="/limites" href="/limites">{{ icone('livro') }} Os 9 Limites</a>
+    <a data-nav="/ia" href="/ia">{{ icone('cpu') }} Inteligência Artificial</a>
+    <a data-nav="/foto" href="/foto">{{ icone('camera') }} Analisar com Foto</a>
+    <div class="sep">Minha jornada</div>
+    <a data-nav="/jogo" href="/jogo">{{ icone('alvo') }} Desafios</a>
+    <a data-nav="/perfil" href="/perfil">{{ icone('user') }} Meu Perfil</a>
+    <a data-nav="/conquistas" href="/conquistas">{{ icone('trofeu') }} Conquistas</a>
+    <a data-nav="/progresso" href="/progresso">{{ icone('grafico') }} Meu Progresso</a>
+    <div class="sep">Mais</div>
+    <a data-nav="/fichas" href="/fichas">{{ icone('cartas') }} Fichas do jogo</a>
+    <a data-nav="/sobre" href="/sobre">{{ icone('info') }} Sobre o Projeto</a>
+    <a data-nav="/configuracoes" href="/configuracoes">{{ icone('config') }} Configurações</a>
+  </nav>
+  <div class="menu-rodape">
+    Protótipo de pesquisa · Ensino médio · Educação ambiental<br>
+    Planet boundaries · Steffen et al. (2015)
+  </div>
+</div>
+
+<!-- Navegação inferior -->
+<nav class="nav-inferior" aria-label="Navegação principal">
+  <a href="/" {% if nav_atual == 'inicio' %}class="ativo" aria-current="page"{% endif %}>{{ icone('home') }}<span>Início</span></a>
+  <a href="/jogo" {% if nav_atual == 'jogar' %}class="ativo" aria-current="page"{% endif %}>{{ icone('jogar') }}<span>Jogar</span></a>
+  <a href="/limites" {% if nav_atual == 'limites' %}class="ativo" aria-current="page"{% endif %}>{{ icone('folha') }}<span>Os 9 Limites</span></a>
+  <a href="/ia" {% if nav_atual == 'ia' %}class="ativo" aria-current="page"{% endif %}>{{ icone('cpu') }}<span>IA</span></a>
+  <a href="/perfil" {% if nav_atual == 'perfil' %}class="ativo" aria-current="page"{% endif %}>{{ icone('user') }}<span>Perfil</span></a>
+</nav>
+
+{% if subiu_nivel %}
+<!-- Parabéns: subiu de nível -->
+<div class="nivel-overlay" id="nivel-overlay" role="dialog" aria-modal="true" aria-labelledby="nivel-titulo" data-nivel="{{ subiu_nivel }}">
+  <div class="nivel-conteudo">
+    <div class="trofeu-grande">🏆</div>
+    <h2 id="nivel-titulo">Parabéns!</h2>
+    <p class="sub">Você subiu de nível!!</p>
+    <div class="nivel-faixa">Nível {{ subiu_nivel }}</div>
+    <div class="nivel-pontos">{{ icone('estrela') }} {{ progresso_resumo.pontos }} pontos</div>
+    <p class="nivel-texto">Continue aprendendo<br>e fazendo a diferença<br>pelo planeta!</p>
+    <a href="/" class="botao-principal botao-bloco" id="nivel-fechar">{{ icone('home') }} Voltar ao Início</a>
+  </div>
+</div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/app.js?v=3"></script>
+{% block scripts_extra %}{% endblock %}
+</body>
+</html>

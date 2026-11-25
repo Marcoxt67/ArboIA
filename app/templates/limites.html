@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+{% block titulo %}Os 9 Limites — ARborIA{% endblock %}
+{% block nav_ativo %}limites{% endblock %}
+{% block topo_titulo %}{{ icone('globo') }}<span>Os 9 Limites</span>{% endblock %}
+{% block subtitulo %}<p class="topo-subtitulo">Conheça os {{ total_limites }} limites planetários<br>e entenda sua importância.</p>{% endblock %}
+
+{% block conteudo %}
+<div class="grade-tiles">
+  {% for limite in limites %}
+  <div class="tile tile-cor" style="--c:{{ limite.cor }}" data-limite="{{ limite.id }}" data-icone="{{ limite.icone }}" title="{{ limite.nome }}">
+    <span class="codigo">{{ limite.codigo }}</span>
+    <span class="emoji" aria-hidden="true">{{ limite.icone }}</span>
+    <span class="rotulo">{{ limite.curto }}</span>
+  </div>
+  {% endfor %}
+</div>
+
+<p class="text-center mt-4 mb-2" style="font-weight:600;font-size:.92rem">Selecione um limite para saber mais:</p>
+<label class="seletor-limite" for="seletor-limite">
+  <span class="bolinha" id="seletor-bolinha" aria-hidden="true">{{ limites[0].icone }}</span>
+  <select id="seletor-limite" aria-label="Escolha um limite planetário">
+    {% for limite in limites %}
+    <option value="{{ limite.id }}">{{ limite.curto }}</option>
+    {% endfor %}
+  </select>
+  {{ icone('direita') }}
+</label>
+
+{% for limite in limites %}
+<section class="painel-limite" data-limite="{{ limite.id }}" aria-label="{{ limite.nome }}">
+  <div class="limite-capa" style="--c1:color-mix(in srgb, {{ limite.cor }} 88%, #fff 12%); --c2:color-mix(in srgb, {{ limite.cor }} 40%, #000 60%)">
+    <span class="emoji" aria-hidden="true">{{ limite.icone }}</span>
+    <span class="etiqueta">{{ limite.codigo }} · {{ limite.nome }}</span>
+    {% if limite.central %}<span class="central">★ Limite central</span>{% endif %}
+  </div>
+
+  <div class="cartao mb-3">
+    <h2 class="titulo-secao">{{ icone('livro') }} Explicação simplificada</h2>
+    <p class="mb-3" style="font-size:.92rem">{{ limite.descricao }}</p>
+    <h3 class="titulo-secao" style="font-size:.92rem">{{ icone('folha') }} Por que importa</h3>
+    <p class="mb-3 text-muted" style="font-size:.86rem">
+      Manter este limite na zona segura ajuda a preservar o equilíbrio do sistema Terra e as condições de vida.
+      O acompanhamento é feito por: <strong style="color:var(--texto)">{{ limite.variavel_controle }}</strong>.
+    </p>
+    <div class="zona"><span class="selo-zona zona-segura">Segura</span><span>{{ limite.zona_segura }}</span></div>
+    <div class="zona"><span class="selo-zona zona-incerteza">Incerteza</span><span>{{ limite.zona_incerteza }}</span></div>
+    <div class="zona mb-0"><span class="selo-zona zona-risco">Risco</span><span>{{ limite.zona_risco }}</span></div>
+  </div>
+
+  <div class="cartao mb-3">
+    <h2 class="titulo-secao">{{ icone('info') }} Problemas relacionados</h2>
+    <ul class="lista-fichas problemas">
+      {% for p in limite.problematicas %}
+      <li><span class="emoji" aria-hidden="true">{{ icones_ficha.get(p.codigo, '⚠️') }}</span><span><small>{{ p.codigo }}</small>{{ p.texto }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="cartao mb-3">
+    <h2 class="titulo-secao">{{ icone('folha') }} Possíveis soluções</h2>
+    <ul class="lista-fichas solucoes">
+      {% for i in limite.intervencoes %}
+      <li><span class="emoji" aria-hidden="true">{{ icones_ficha.get(i.codigo, '💡') }}</span><span><small>{{ i.codigo }}</small>{{ i.texto }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="d-grid gap-2">
+    <a href="/jogo" class="botao-principal">{{ icone('jogar') }} Usar essas fichas no jogo</a>
+    <a href="/ia" class="botao-contorno">{{ icone('cpu') }} Conversar com a IA</a>
+  </div>
+</section>
+{% endfor %}
+
+<p class="small text-center mt-4" style="color:var(--muted)">
+  Valores de zona segura são aproximações didáticas. Para uso técnico, consulte a publicação original.
+</p>
+{% endblock %}

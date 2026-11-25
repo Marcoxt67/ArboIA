@@ -1,0 +1,248 @@
+{
+  "metadados": {
+    "projeto": "ARboIA",
+    "versao_modelo": "Steffen et al. (2015)",
+    "versao_base": "1.0",
+    "idioma": "pt-BR",
+    "total_limites": 9,
+    "nota": "Limiares aproximados para fins didáticos. Consultar publicação original para uso técnico."
+  },
+  "limites": [
+    {
+      "id": "clima",
+      "codigo": "L1",
+      "nome": "Mudança climática",
+      "central": true,
+      "variavel_controle": "CO2 atmosférico (ppm) e forçamento radiativo (W/m2)",
+      "zona_segura": "CO2 < 350 ppm; forçamento < 1 W/m2",
+      "zona_incerteza": "350-550 ppm; 1-2 W/m2",
+      "zona_risco": "> 550 ppm; > 2 W/m2",
+      "descricao": "Regula temperatura média global, regime de chuvas e estabilidade das calotas polares.",
+      "palavras_chave": ["clima", "climatica", "climático", "co2", "carbono", "emissao", "emissões", "aquecimento", "temperatura", "gas", "efeito estufa", "metano"],
+      "problematicas": [
+        {"codigo": "P1.1", "texto": "Emissoes de CO2 do transporte urbano crescem 4% ao ano", "palavras_chave": ["transporte", "onibus", "carro", "frota", "urbano", "emissoes"]},
+        {"codigo": "P1.2", "texto": "Onda de calor prolongada derruba a producao de alimentos", "palavras_chave": ["calor", "safra", "alimentos", "agricultura", "seca"]},
+        {"codigo": "P1.3", "texto": "Degelo acelerado altera correntes oceanicas e o clima regional", "palavras_chave": ["degelo", "correntes", "oceano", "polo", "gelo"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I1.1", "texto": "Eletrificacao da frota de onibus com energia renovavel", "palavras_chave": ["eletrificacao", "onibus", "energia", "renovavel", "frota"], "afeta": ["clima", "fosforo", "aerossois"]},
+        {"codigo": "I1.2", "texto": "Restauracao de manguezais e florestas urbanas como sumidouros de carbono", "palavras_chave": ["manguezal", "floresta", "sumidouro", "carbono", "restauracao"], "afeta": ["clima", "biodiversidade", "oceanos", "uso_solo"]},
+        {"codigo": "I1.3", "texto": "Agroecologia com plantio direto e integracao lavoura-pecuaria", "palavras_chave": ["agroecologia", "plantio direto", "lavoura", "pecuaria", "solo"], "afeta": ["clima", "nitrogenio", "uso_solo", "biodiversidade"]}
+      ]
+    },
+    {
+      "id": "biodiversidade",
+      "codigo": "L2",
+      "nome": "Perda de biodiversidade funcional",
+      "central": true,
+      "variavel_controle": "Diversidade funcional de especies (indice de redundancia ecologica)",
+      "zona_segura": "Perda < 10% da diversidade funcional",
+      "zona_incerteza": "Perda de 10-30%",
+      "zona_risco": "> 30% de perda",
+      "descricao": "Mede a funcao ecologica exercida pelas especies, nao apenas a contagem delas.",
+      "palavras_chave": ["biodiversidade", "biodiversidade funcional", "diversidade", "especies", "ecosistema", "polinizador", "funcional"],
+      "problematicas": [
+        {"codigo": "P2.1", "texto": "Abate de polinizadores por inseticidas em monoculturas", "palavras_chave": ["polinizador", "inseticida", "monocultura", "abelha"]},
+        {"codigo": "P2.2", "texto": "Fragmentacao de habitat isola populacoes em ilhas de floresta", "palavras_chave": ["fragmentacao", "habitat", "floresta", "isolamento"]},
+        {"codigo": "P2.3", "texto": "Especies oportunistas substituem vegetacao nativa em pastagens", "palavras_chave": ["oportunista", "capim", "pastagem", "vegetacao", "invasiva"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I2.1", "texto": "Corredores ecologicos conectando fragmentos de floresta", "palavras_chave": ["corredor", "ecologico", "conectar", "fragmento"], "afeta": ["biodiversidade", "uso_solo", "extincao"]},
+        {"codigo": "I2.2", "texto": "Agrofloresta com especies nativas e polinizadores locais", "palavras_chave": ["agrofloresta", "nativas", "polinizador"], "afeta": ["biodiversidade", "nitrogenio", "uso_solo", "clima"]},
+        {"codigo": "I2.3", "texto": "Controle biologico de pragas em vez de agrotoxicos", "palavras_chave": ["controle biologico", "pragas", "agrotoxico", "predador"], "afeta": ["biodiversidade", "nitrogenio", "fosforo"]}
+      ]
+    },
+    {
+      "id": "extincao",
+      "codigo": "L3",
+      "nome": "Extinção biótica",
+      "central": false,
+      "variavel_controle": "Taxa de extincao (E/MSY)",
+      "zona_segura": "< 10 E/MSY",
+      "zona_incerteza": "10-100 E/MSY",
+      "zona_risco": "> 100 E/MSY",
+      "descricao": "Extincao e irreversivel; taxa atual estimada entre 100 e 1000 vezes acima do background geologico.",
+      "palavras_chave": ["extincao", "extinção", "extinto", "ameacada", "desaparecimento", "specie", "espécies"],
+      "problematicas": [
+        {"codigo": "P3.1", "texto": "Trafico de animais silvestres retira especies-chave", "palavras_chave": ["trafico", "animais", "silvestres", "caça"]},
+        {"codigo": "P3.2", "texto": "Especies endemicas desaparecem antes de serem catalogadas", "palavras_chave": ["endemica", "catalogar", "ciencia", "desconhecida"]},
+        {"codigo": "P3.3", "texto": "Pesca predatoria colapsa populações de grandes peixes", "palavras_chave": ["pesca", "predatoria", "peixes", "recife"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I3.1", "texto": "Unidades de conservacao com manejo participativo", "palavras_chave": ["conservacao", "unidade", "participativo", "reserva"], "afeta": ["extincao", "biodiversidade", "uso_solo"]},
+        {"codigo": "I3.2", "texto": "Reproducao e reintroducao de especies ameaçadas", "palavras_chave": ["reproducao", "reintroducao", "ameacadas", "criadeiro"], "afeta": ["extincao", "biodiversidade"]},
+        {"codigo": "I3.3", "texto": "Monitoramento por DNA ambiental (eDNA) em rios", "palavras_chave": ["edna", "dna", "monitoramento", "rios"], "afeta": ["extincao", "agua", "biodiversidade"]}
+      ]
+    },
+    {
+      "id": "nitrogenio",
+      "codigo": "L4",
+      "nome": "Interferência no ciclo do nitrogênio",
+      "central": false,
+      "variavel_controle": "N fixado industrial e agrícola (Tg N/ano)",
+      "zona_segura": "< 35 Tg N/ano",
+      "zona_incerteza": "35-75 Tg N/ano",
+      "zona_risco": "> 75 Tg N/ano",
+      "descricao": "Excesso de N causa eutrofizacao, mortandade de peixes e emissoes de N2O.",
+      "palavras_chave": ["nitrogenio", "nitrogênio", "n", "fertilizante", "eutrofizacao", "nitrato", "amonia", "fixacao"],
+      "problematicas": [
+        {"codigo": "P4.1", "texto": "Fertilizantes nitrogenados causam floracao de algas toxicas", "palavras_chave": ["fertilizante", "algas", "toxica", "eutrofizacao"]},
+        {"codigo": "P4.2", "texto": "Monocultura de leguminosas acidifica o solo", "palavras_chave": ["soja", "feijao", "leguminosa", "acido", "solo"]},
+        {"codigo": "P4.3", "texto": "Dejetos de suinocultura contaminam lençol freatico", "palavras_chave": ["dejetos", "suinocultura", "lençol", "freatico", "nitrato"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I4.1", "texto": "Adubacao de precisao com sensores", "palavras_chave": ["adubacao", "precisao", "sensores"], "afeta": ["nitrogenio", "fosforo", "agua"]},
+        {"codigo": "I4.2", "texto": "Rotacao de culturas com leguminosas e adubo verde", "palavras_chave": ["rotacao", "culturas", "leguminosas", "adubo verde"], "afeta": ["nitrogenio", "biodiversidade", "uso_solo"]},
+        {"codigo": "I4.3", "texto": "Wetlands construidas para tratamento de efluentes", "palavras_chave": ["wetland", "efluente", "tratamento", "tampao"], "afeta": ["nitrogenio", "fosforo", "agua", "biodiversidade"]}
+      ]
+    },
+    {
+      "id": "fosforo",
+      "codigo": "L5",
+      "nome": "Interferência no ciclo do fósforo",
+      "central": false,
+      "variavel_controle": "Fluxo de P para os oceanos (Tg P/ano)",
+      "zona_segura": "< 11 Tg P/ano",
+      "zona_incerteza": "11-100 Tg P/ano",
+      "zona_risco": "> 100 Tg P/ano",
+      "descricao": "Fosforo e finito e essencial para DNA e ATP; excesso causa eutrofizacao.",
+      "palavras_chave": ["fosforo", "fósforo", "p", "fosfato", "mineracao", "detergente", "struvita"],
+      "problematicas": [
+        {"codigo": "P5.1", "texto": "Mineracao de fosfato contamina rios com metais pesados", "palavras_chave": ["mineracao", "fosfato", "metais", "rios"]},
+        {"codigo": "P5.2", "texto": "Detergentes e esgoto despejam fosfato em lagoas urbanas", "palavras_chave": ["detergente", "esgoto", "lagoa", "fosfato"]},
+        {"codigo": "P5.3", "texto": "Dependencia de fertilizantes importados aumenta vulnerabilidade", "palavras_chave": ["importado", "fertilizante", "dependencia", "vulnerabilidade"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I5.1", "texto": "Recuperacao de fosforo do esgoto por struvita", "palavras_chave": ["struvita", "recuperacao", "esgoto", "precipitacao"], "afeta": ["fosforo", "nitrogenio", "agua"]},
+        {"codigo": "I5.2", "texto": "Compostagem de residuos organicos urbanos", "palavras_chave": ["compostagem", "organicos", "adubo", "residuos"], "afeta": ["fosforo", "nitrogenio", "uso_solo"]},
+        {"codigo": "I5.3", "texto": "Detergentes sem fosfato e saneamento basico universal", "palavras_chave": ["detergente", "saneamento", "sem fosfato"], "afeta": ["fosforo", "nitrogenio", "agua"]}
+      ]
+    },
+    {
+      "id": "uso_solo",
+      "codigo": "L6",
+      "nome": "Mudança no uso do solo",
+      "central": false,
+      "variavel_controle": "Cobertura florestal em biomas tropicais, temperados e boreais",
+      "zona_segura": "> 85% da cobertura original",
+      "zona_incerteza": "60-85%",
+      "zona_risco": "< 60%",
+      "descricao": "Conversao de florestas altera albedo, ciclo da agua e estoques de carbono.",
+      "palavras_chave": ["uso do solo", "desmatamento", "floresta", "cobertura", "pastagem", "soja", "cerrado", "amazonia", "zoneamento"],
+      "problematicas": [
+        {"codigo": "P6.1", "texto": "Desmatamento para expansao da soja no Cerrado", "palavras_chave": ["desmatamento", "soja", "cerrado", "expansao"]},
+        {"codigo": "P6.2", "texto": "Pastagens degradadas ocupam terras sem ganho de produtividade", "palavras_chave": ["pastagem", "degradada", "produtividade"]},
+        {"codigo": "P6.3", "texto": "Loteamento irregular em encostas aumenta deslizamentos", "palavras_chave": ["loteamento", "encosta", "deslizamento", "urbano"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I6.1", "texto": "Intensificacao sustentavel de pastagens existentes", "palavras_chave": ["intensificacao", "pastagem", "sustentavel"], "afeta": ["uso_solo", "clima", "biodiversidade"]},
+        {"codigo": "I6.2", "texto": "Restauracao de APPs com mudas nativas", "palavras_chave": ["app", "restauracao", "mudas", "nativas", "mata ciliar"], "afeta": ["uso_solo", "clima", "agua", "biodiversidade"]},
+        {"codigo": "I6.3", "texto": "Plano diretor com zoneamento ecologico-economico", "palavras_chave": ["plano diretor", "zoneamento", "municipal"], "afeta": ["uso_solo", "agua", "biodiversidade"]}
+      ]
+    },
+    {
+      "id": "agua",
+      "codigo": "L7",
+      "nome": "Consumo de água doce",
+      "central": false,
+      "variavel_controle": "Extracao anual de agua doce (km3/ano)",
+      "zona_segura": "< 4000 km3/ano",
+      "zona_incerteza": "4000-6000 km3/ano",
+      "zona_risco": "> 6000 km3/ano",
+      "descricao": "Agua doce acessivel e menos de 1% do total planetario e distribuida de forma desigual.",
+      "palavras_chave": ["agua", "água", "agua doce", "hidrico", "irrigacao", "cisterna", "chuva", "lençol", "abastecimento"],
+      "problematicas": [
+        {"codigo": "P7.1", "texto": "Irrigacao ineficiente consome 70% da agua doce", "palavras_chave": ["irrigacao", "ineficiente", "semiardio", "consumo"]},
+        {"codigo": "P7.2", "texto": "Captacao irregular rebaixa o lençol freatico urbano", "palavras_chave": ["captacao", "lençol", "freatico", "poco"]},
+        {"codigo": "P7.3", "texto": "Contaminacao por esgoto inutiliza rios para abastecimento", "palavras_chave": ["esgoto", "contaminacao", "rio", "abastecimento"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I7.1", "texto": "Irrigacao por gotejamento com sensores de umidade", "palavras_chave": ["gotejamento", "irrigacao", "sensores", "umidade"], "afeta": ["agua", "fosforo", "nitrogenio"]},
+        {"codigo": "I7.2", "texto": "Captacao de agua da chuva e cisternas escolares", "palavras_chave": ["cisterna", "chuva", "captacao", "escola"], "afeta": ["agua", "uso_solo"]},
+        {"codigo": "I7.3", "texto": "Tratamento e reuso de agua cinza em edificios publicos", "palavras_chave": ["reuso", "cinza", "tratamento", "edificio"], "afeta": ["agua", "fosforo", "nitrogenio"]}
+      ]
+    },
+    {
+      "id": "oceanos",
+      "codigo": "L8",
+      "nome": "Acidificação dos oceanos",
+      "central": false,
+      "variavel_controle": "Grau de saturacao de aragonita (Omega) na superficie",
+      "zona_segura": "Omega > 3,0",
+      "zona_incerteza": "2,5-3,0",
+      "zona_risco": "Omega < 2,5",
+      "descricao": "Absorcao de CO2 forma acido carbonico e dificulta conchas e esqueletos de corais.",
+      "palavras_chave": ["acidificacao", "acidificação", "oceano", "oceanos", "aragonita", "coral", "concha", "ph", "mollusco"],
+      "problematicas": [
+        {"codigo": "P8.1", "texto": "Branqueamento de corais por temperatura e acidez", "palavras_chave": ["branqueamento", "coral", "temperatura", "acidez"]},
+        {"codigo": "P8.2", "texto": "Reducao de crustaceos e moluscos afeta a pesca artesanal", "palavras_chave": ["crustaceo", "molusco", "pesca", "cadeia alimentar"]},
+        {"codigo": "P8.3", "texto": "Recifes perdem funcao de quebra-mar e aumenta erosao costeira", "palavras_chave": ["recife", "quebra-mar", "erosao", "costa"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I8.1", "texto": "Reducao de emissoes de CO2 na causa-raiz", "palavras_chave": ["reducao", "emissoes", "co2", "causa"], "afeta": ["oceanos", "clima", "aerossois"]},
+        {"codigo": "I8.2", "texto": "Restauracao de recifes com corais resistentes ao calor", "palavras_chave": ["recife", "coral", "resistente", "restauracao"], "afeta": ["oceanos", "biodiversidade", "extincao"]},
+        {"codigo": "I8.3", "texto": "Protecao de manguezais que regulam pH costeiro", "palavras_chave": ["manguezal", "ph", "costa", "abrigo"], "afeta": ["oceanos", "clima", "biodiversidade", "extincao"]}
+      ]
+    },
+    {
+      "id": "aerossois",
+      "codigo": "L9",
+      "nome": "Aerossóis atmosféricos",
+      "central": false,
+      "variavel_controle": "Profundidade optica de aerossóis (AOD)",
+      "zona_segura": "AOD < 0,25",
+      "zona_incerteza": "0,25-0,50",
+      "zona_risco": "AOD > 0,50",
+      "descricao": "Particulas afetam saude respiratoria e clima; algumas resfriam, outras aquecem. Maior incerteza do modelo.",
+      "palavras_chave": ["aerossol", "aerossóis", "aerosol", "fumaca", "queimada", "poluicao", "pm25", "particulado", "aod"],
+      "problematicas": [
+        {"codigo": "P9.1", "texto": "Fumaca de queimadas agrava crise respiratoria urbana", "palavras_chave": ["fumaca", "queimada", "respiratorio", "saude"]},
+        {"codigo": "P9.2", "texto": "Material particulado de industrias e veiculos aumenta mortes", "palavras_chave": ["particulado", "industria", "veiculo", "pm25"]},
+        {"codigo": "P9.3", "texto": "Poeira do Saara transporta nutrientes e patogenos ao Atlantico", "palavras_chave": ["poeira", "saara", "atlantico", "nutrientes"]}
+      ],
+      "intervencoes": [
+        {"codigo": "I9.1", "texto": "Controle de emissões veiculares e filtros industriais", "palavras_chave": ["filtro", "emissao", "veiculo", "industria"], "afeta": ["aerossois", "clima", "biodiversidade"]},
+        {"codigo": "I9.2", "texto": "Manejo integrado do fogo em biomas secos", "palavras_chave": ["fogo", "queimada", "manejo", "bioma"], "afeta": ["aerossois", "clima", "uso_solo", "biodiversidade"]},
+        {"codigo": "I9.3", "texto": "Monitoramento por satelite e sensores de baixo custo", "palavras_chave": ["satelite", "sensor", "monitoramento", "escola"], "afeta": ["aerossois", "clima"]}
+      ]
+    }
+  ],
+  "sinergias": [
+    {"de": ["clima"], "para": ["oceanos"], "texto": "Reduzir CO2 ao mesmo tempo diminui o aquecimento e a acidificacao dos oceanos.", "forca": 3},
+    {"de": ["clima"], "para": ["uso_solo"], "texto": "Florestas restauradas armazenam carbono e estabilizam o clima regional.", "forca": 3},
+    {"de": ["biodiversidade"], "para": ["clima"], "texto": "Diversidade funcional aumenta a resiliencia ecologica a eventos climaticos extremos.", "forca": 2},
+    {"de": ["biodiversidade"], "para": ["uso_solo"], "texto": "Corredores ecológicos recuperam cobertura vegetal e conectam fragmentos.", "forca": 3},
+    {"de": ["nitrogenio"], "para": ["fosforo"], "texto": "Eutrofizacao tem causas compartilhadas: controlar N e P juntos e mais eficaz.", "forca": 3},
+    {"de": ["nitrogenio"], "para": ["agua"], "texto": "Menos nitrogenio escoado melhora a qualidade da agua doce.", "forca": 2},
+    {"de": ["fosforo"], "para": ["agua"], "texto": "Recuperar fosforo do esgoto reduz a contaminacao de rios e lagoas.", "forca": 3},
+    {"de": ["agua"], "para": ["uso_solo"], "texto": "Mata ciliar protegida regula o regime hídrico e evita erosao do solo.", "forca": 2},
+    {"de": ["extincao"], "para": ["biodiversidade"], "texto": "Evitar extincoes preserva a redundancia funcional dos ecossistemas.", "forca": 3},
+    {"de": ["oceanos"], "para": ["extincao"], "texto": "Manguezais e recifes abrigam especies ameaçadas em fases iniciais de vida.", "forca": 2},
+    {"de": ["aerossois"], "para": ["biodiversidade"], "texto": "Menos poluicao atmosferica reduz estresse em plantas e polinizadores.", "forca": 1}
+  ],
+  "tradeoffs": [
+    {"de": ["clima", "fosforo"], "texto": "Eletrificar frotas reduz CO2, mas aumenta a demanda por lítio e cobre, com impactos de mineração.", "forca": 3},
+    {"de": ["clima", "aerossois"], "texto": "Alguns aerossóis resfriam o planeta; removê-los rapidamente pode acelerar o aquecimento de curto prazo.", "forca": 3},
+    {"de": ["extincao", "uso_solo"], "texto": "Unidades de conservação podem conflitar com comunidades que dependem da terra para subsistência se o manejo não for participativo.", "forca": 2},
+    {"de": ["biodiversidade", "nitrogenio"], "texto": "Aumentar leguminosas fixa nitrogênio, mas em monocultura pode acidificar o solo e desequilibrar o ciclo do N.", "forca": 2},
+    {"de": ["uso_solo", "agua"], "texto": "Intensificar pastagens pode aumentar o consumo de água se feito sem manejo adequado.", "forca": 1},
+    {"de": ["oceanos", "clima"], "texto": "Corais resistentes ao calor ajudam, mas não substituem a redução de emissões: é adaptação, não mitigação.", "forca": 2}
+  ],
+  "perguntas_reflexivas": [
+    "Qual das suas fichas de intervenção gera efeito em um limite que vocês não tinham colocado na mesa?",
+    "Se o limite central mudasse, qual ficha vocês trocariam primeiro? Por quê?",
+    "Existe alguma solução aqui que só funciona porque alguém em outro lugar arca com o custo?",
+    "Qual relação vocês conseguem explicar sem olhar a IA — e qual ainda depende dela?",
+    "O que aconteceria se a intervenção escolhida fosse aplicada por 10 anos seguidos?",
+    "Como a justiça social aparece (ou não aparece) na sua combinação?",
+    "Qual limite planetário ficou de fora e por que será que vocês o deixaram de lado?",
+    "Vocês confiariam nessa proposta sem o feedback da IA? O que mudaria?"
+  ],
+  "mensagens_feedback": {
+    "sem_fichas": "Não consegui reconhecer fichas nesta imagem. Tente uma foto com melhor iluminação e as fichas bem separadas.",
+    "poucas_fichas": "Reconheci poucas fichas. Lembre-se de usar pelo menos uma de cada cor: limite, problemática e intervenção.",
+    "sucesso": "Boa combinação! A análise abaixo mostra o que a IA conseguiu perceber — e o que ainda está em aberto.",
+    "modo_local": "Análise realizada localmente (OCR + regras), sem envio de dados externos.",
+    "modo_multimodal": "Análise realizada com IA multimodal. Os dados trafegaram para o provedor da API."
+  }
+}

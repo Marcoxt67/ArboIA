@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% from "_icones.html" import icone %}
+
+{% block titulo %}Jogar — ARborIA{% endblock %}
+{% block nav_ativo %}jogar{% endblock %}
+{% block topo_titulo %}{{ icone('jogar') }}<span>Jogar</span>{% endblock %}
+{% block subtitulo %}<p class="topo-subtitulo">Monte sua combinação<br>e descubra o impacto!</p>{% endblock %}
+
+{% block conteudo %}
+<form action="/analisar_digital" method="post" id="form-digital">
+  <input type="hidden" name="fichas_selecionadas" id="fichas-selecionadas">
+
+  <div class="abas-ficha" role="group" aria-label="Tipo de ficha">
+    <button type="button" class="aba-ficha" data-aba="limite">{{ icone('globo') }} Limites</button>
+    <button type="button" class="aba-ficha" data-aba="problema">{{ icone('info') }} Problemáticas</button>
+    <button type="button" class="aba-ficha" data-aba="solucao">{{ icone('folha') }} Soluções</button>
+  </div>
+
+  <div class="grade-tiles">
+    {% for ficha in fichas %}
+    <div class="tile tile-{{ ficha.categoria }}"
+         data-categoria="{{ ficha.categoria }}" data-ficha="{{ ficha.codigo }}"
+         data-curto="{{ ficha.curto }}" data-icone="{{ ficha.icone }}"
+         title="{{ ficha.texto }}">
+      <span class="codigo">{{ ficha.codigo }}</span>
+      <span class="selo">{{ icone('check') }}</span>
+      <span class="emoji" aria-hidden="true">{{ ficha.icone }}</span>
+      <span class="rotulo">{{ ficha.curto }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <section class="cartao combo" aria-live="polite">
+    <h2>Sua Combinação <small>(<span id="selecao-contador">0</span>)</small></h2>
+    <div class="combo-lista" id="combo-lista"></div>
+    <button type="submit" class="botao-principal" id="botao-analisar" disabled>
+      {{ icone('brilho') }} Analisar com IA
+    </button>
+  </section>
+</form>
+
+<p class="text-center small mt-4 mb-1" style="color:var(--muted)">
+  Dica: combine uma ficha azul, uma vermelha e uma verde para a análise mais completa.
+</p>
+<div class="d-flex gap-2 justify-content-center flex-wrap mt-2">
+  <a href="/foto" class="botao-contorno botao-pequeno">{{ icone('camera') }} Prefiro fotografar</a>
+  <a href="/jogo" class="botao-contorno botao-pequeno">{{ icone('alvo') }} Desafios</a>
+</div>
+{% endblock %}
