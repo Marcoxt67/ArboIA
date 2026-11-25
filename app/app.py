@@ -30,6 +30,7 @@ Rotas:
 from __future__ import annotations
 
 import json
+import logging
 import os
 import sys
 import uuid
@@ -529,9 +530,10 @@ def analisar():
     try:
         relatorio = processar(caminho, request.form.get("texto_manual", ""))
     except Exception as exc:  # noqa: BLE001
+        logging.exception("Falha no pipeline de análise de imagem (/analisar)")
         return render_template(
             "resultado.html",
-            erro=f"Não foi possível analisar a imagem: {exc}",
+            erro=f"Não foi possível analisar a imagem. Consulte os logs do servidor. ({type(exc).__name__})",
             relatorio=None,
         ), 500
 
@@ -597,8 +599,9 @@ def analisar_fase():
     try:
         relatorio = processar(caminho, request.form.get("texto_manual", ""))
     except Exception as exc:  # noqa: BLE001
+        logging.exception("Falha no pipeline de análise de fase (/analisar_fase)")
         return render_template(
-            "resultado_fase.html", erro=f"Não foi possível analisar: {exc}",
+            "resultado_fase.html", erro=f"Não foi possível analisar. Consulte os logs do servidor. ({type(exc).__name__})",
             fase=fase_atual, progresso=progresso, pontuacao=None, relatorio=None,
         ), 500
 

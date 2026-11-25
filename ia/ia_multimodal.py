@@ -177,15 +177,15 @@ def analisar_imagem(caminho: str, modelo: str | None = None) -> dict[str, Any] |
     from openai import OpenAI
 
     chave, base, modelo_config = obter_configuracao()
-    cliente = (OpenAI(base_url=base, api_key=chave) if base
-               else OpenAI(api_key=chave))
-
     modelo = modelo or modelo_config
-    imagem_base64, mime = _codificar_imagem(caminho)
-
     modelos_tentados: list[str] = []
     for tentativa in range(2):
         try:
+            # Inicialização do cliente e leitura/codificação também dentro do try:
+            # erros de configuração/arquivo devem cair no OCR local, não em 500.
+            cliente = (OpenAI(base_url=base, api_key=chave) if base
+                       else OpenAI(api_key=chave))
+            imagem_base64, mime = _codificar_imagem(caminho)
             resposta = cliente.chat.completions.create(
                 model=modelo,
                 messages=[
@@ -235,7 +235,8 @@ def analisar_imagem(caminho: str, modelo: str | None = None) -> dict[str, Any] |
                 print(f"[ARborIA] Modelo alternado para {modelo} ({nome}).")
                 continue
 
-            print(f"[ARborIA] IA multimodal falhou ({nome}): {mensagem[:200]}")
+            # Log sem expor a chave de API. Render captura stdout/stderr.
+            print(f"[ARborIA] IA multimodal falhou ({nome}); modelo={modelo}; base={base or 'OpenAI padrão'}; detalhe={mensagem[:300]}")
             return None
 
     return None
